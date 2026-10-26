@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Successful - Noor-E-Mahal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --gold: #d4af37; --gold-light: #f0d77b; --black: #0a0a0a; --white: #ffffff; --gray: #999999; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--black);
+            color: var(--white);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.85);
+            z-index: -1;
+        }
+        .success-container {
+            background: rgba(20,20,20,0.8);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(212,175,55,0.25);
+            border-radius: 24px;
+            padding: 50px 45px;
+            max-width: 550px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+            animation: fadeInUp 0.6s ease;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .success-icon {
+            width: 100px;
+            height: 100px;
+            background: rgba(52, 211, 153, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            border: 2px solid #34d399;
+        }
+        .success-icon i {
+            font-size: 50px;
+            color: #34d399;
+        }
+        .success-container h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+        .success-container h1 span { color: var(--gold); }
+        .success-container .subtitle {
+            color: var(--gray);
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+        .booking-details {
+            background: rgba(212,175,55,0.06);
+            border: 1px solid rgba(212,175,55,0.12);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .booking-details p {
+            color: #ccc;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        .booking-details .highlight {
+            color: var(--gold);
+            font-weight: 600;
+        }
+        .booking-details .booking-id {
+            color: var(--gold-light);
+            font-weight: 700;
+            font-size: 18px;
+            font-family: 'Playfair Display', serif;
+        }
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #d4af37, #f0d77b);
+            color: #000;
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(212,175,55,0.3);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+        }
+        .btn-outline:hover {
+            background: var(--gold);
+            color: #000;
+            transform: translateY(-3px);
+        }
+        @media (max-width: 600px) {
+            .success-container { padding: 30px 20px; }
+            .btn-group { flex-direction: column; }
+            .btn { justify-content: center; }
+        }
+    </style>
+</head>
+<body data-page="booking_success">
+    <div class="success-container">
+        <div class="success-icon">
+            <i class="fas fa-check"></i>
+        </div>
+        
+        <h1>Booking <span>Successful!</span></h1>
+        <p class="subtitle">Your wedding booking has been confirmed. We'll get back to you soon!</p>
+        
+        <div class="booking-details">
+            <p><i class="fas fa-gift" style="color:var(--gold);margin-right:8px;"></i> Package: <span class="highlight" id="bsProduct">Your Package</span></p>
+            <p style="margin-top:8px;"><i class="fas fa-ticket" style="color:var(--gold);margin-right:8px;"></i> Booking ID: <span class="booking-id" id="bsId">#000000</span></p>
+            <p style="margin-top:8px;font-size:12px;color:#888;">We will contact you within 24 hours to confirm your booking.</p>
+        </div>
+        
+        <div class="btn-group">
+            <a href="index.html" class="btn btn-primary"><i class="fas fa-home"></i> Go to Home</a>
+            <a href="services.html" class="btn btn-outline"><i class="fas fa-concierge-bell"></i> Browse More</a>
+        </div>
+    </div>
+<script src="js/data.js"></script>
+<script src="js/pages.js"></script>
+</body>
+</html>
+
+
+

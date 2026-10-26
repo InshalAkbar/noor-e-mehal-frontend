@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQs - Noor e Mehal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #FFD700;
+            --primary-dark: #e6c200;
+            --black: #0a0a0a;
+            --black-light: #1a1a1a;
+            --gray: #888;
+            --white: #ffffff;
+            --gold: #d4af37;
+            --gold-light: #f0d77b;
+            --gold-dark: #a88920;
+            --border: rgba(212, 175, 55, 0.22);
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--black);
+            color: var(--white);
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* ===== FULL PAGE VIDEO BACKGROUND ===== */
+        .bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+        }
+
+        .bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            z-index: -1;
+        }
+
+        /* ===== ALL SECTIONS TRANSPARENT ===== */
+        .announcement-bar,
+        header,
+        .faq-hero,
+        .faq-section,
+        .faq-cta,
+        .about-footer {
+            background: transparent !important;
+            backdrop-filter: blur(2px);
+        }
+
+        .announcement-bar {
+            background: rgba(212, 175, 55, 0.9) !important;
+            color: var(--black);
+            padding: 10px 0;
+            text-align: center;
+            font-weight: 600;
+            font-size: 14px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1001;
+        }
+        .announcement-bar .marquee {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 25s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .announcement-bar .badge-count {
+            background: var(--black);
+            color: var(--primary);
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+
+        /* ================= HEADER ================= */
+        header {
+            background: rgba(10, 10, 10, 0.85) !important;
+            padding: 15px 40px;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid rgba(255, 215, 0, 0.15);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            justify-self: center;
+            text-decoration: none;
+        }
+        .logo h1 {
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--white);
+            letter-spacing: -0.5px;
+            font-family: 'Cinzel', serif;
+        }
+        .logo h1 span { color: var(--gold); }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            justify-self: start;
+        }
+        .nav-links a {
+            color: var(--gray);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            transition: .3s;
+            position: relative;
+        }
+        .nav-links a:hover,
+        .nav-links a.active { color: var(--gold); }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: .3s;
+        }
+        .nav-links a:hover::after,
+        .nav-links a.active::after { width: 100%; }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            justify-self: end;
+            gap: 15px;
+        }
+        .nav-actions .btn {
+            padding: 10px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: .3s;
+        }
+        .btn-primary {
+            background: var(--gold);
+            color: var(--black);
+        }
+        .btn-primary:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.3);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--gold);
+        }
+        .btn-outline:hover {
+            background: var(--gold);
+            color: var(--black);
+        }
+        .btn-outline i { color: var(--gold); }
+        .btn-outline:hover i { color: var(--black); }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        /*=========================================
+                    FAQ HERO
+        =========================================*/
+        .faq-hero {
+            min-height: calc(100vh - 100px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 80px 20px;
+            background: transparent !important;
+        }
+
+        .faq-hero-content {
+            width: 100%;
+            max-width: 900px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .faq-hero-content h5 {
+            color: #d4af37;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 5px;
+            margin: 0 0 22px;
+        }
+
+        .faq-hero-content h1 {
+            color: #fff;
+            font-family: 'Playfair Display', serif;
+            font-size: 58px;
+            line-height: 1.2;
+            margin: 0 auto 25px;
+        }
+
+        .faq-hero-content p {
+            color: #ddd;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            line-height: 1.8;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /*=========================================
+                FAQ SECTION
+        =========================================*/
+        .faq-section {
+            padding: 110px 0;
+            background: transparent !important;
+        }
+
+        .faq-heading {
+            max-width: 750px;
+            margin: 0 auto 55px;
+            text-align: center;
+        }
+
+        .faq-heading .small-title {
+            color: #d4af37;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 4px;
+            margin-bottom: 15px;
+        }
+
+        .faq-heading .section-title {
+            color: #fff;
+            font-family: 'Playfair Display', serif;
+            font-size: 46px;
+            margin-bottom: 18px;
+        }
+
+        .faq-heading .section-text {
+            color: #aaa;
+            font-family: 'Poppins', sans-serif;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .faq-container {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: rgba(21, 21, 21, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(212, 175, 55, .20);
+            border-radius: 14px;
+            margin-bottom: 16px;
+            overflow: hidden;
+            transition: .3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: #d4af37;
+        }
+
+        .faq-question {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 22px 25px;
+            background: transparent;
+            border: none;
+            color: #fff;
+            text-align: left;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .faq-question i {
+            color: #d4af37;
+            font-size: 15px;
+            flex-shrink: 0;
+            transition: transform .35s ease;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .4s ease;
+        }
+
+        .faq-answer p {
+            color: #aaa;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            line-height: 1.8;
+            padding: 0 25px 22px;
+            margin: 0;
+        }
+
+        .faq-item.active {
+            border-color: #d4af37;
+        }
+
+        .faq-item.active .faq-question {
+            color: #d4af37;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        /*=========================================
+                FAQ CTA
+        =========================================*/
+        .faq-cta {
+            background: rgba(0,0,0,0.5) !important;
+            backdrop-filter: blur(4px);
+            padding: 110px 20px;
+            text-align: center;
+        }
+
+        .faq-cta-content {
+            max-width: 750px;
+            margin: 0 auto;
+        }
+
+        .faq-cta-content h5 {
+            color: #d4af37;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 4px;
+            margin-bottom: 18px;
+        }
+
+        .faq-cta-content h2 {
+            color: #fff;
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            line-height: 1.3;
+            margin-bottom: 20px;
+        }
+
+        .faq-cta-content h2 span {
+            color: #d4af37;
+        }
+
+        .faq-cta-content p {
+            color: #ccc;
+            font-family: 'Poppins', sans-serif;
+            font-size: 15px;
+            line-height: 1.8;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        .faq-cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            background: #d4af37;
+            color: #000;
+            border-radius: 30px;
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            transition: .35s ease;
+        }
+
+        .faq-cta-btn i {
+            transition: .35s ease;
+        }
+
+        .faq-cta-btn:hover {
+            background: #fff;
+        }
+
+        .faq-cta-btn:hover i {
+            transform: translateX(6px);
+        }
+
+        /*=========================
+                Footer
+        =========================*/
+        .about-footer {
+            background: rgba(0,0,0,0.9) !important;
+            padding: 70px 0 25px;
+            border-top: 2px solid #d4af37;
+            backdrop-filter: blur(5px);
+        }
+
+        .footer-logo {
+            color: #d4af37;
+            font-family: 'Cinzel', serif;
+            font-size: 34px;
+            margin-bottom: 20px;
+        }
+
+        .footer-text {
+            color: #bdbdbd;
+            line-height: 1.9;
+            max-width: 500px;
+        }
+
+        .developer-title {
+            color: #d4af37;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .developer-name {
+            color: #fff;
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .developer-role {
+            color: #bdbdbd;
+        }
+
+        .about-footer hr {
+            border-color: rgba(212, 175, 55, .25);
+            margin: 40px 0 20px;
+        }
+
+        .copyright {
+            text-align: center;
+            color: #888;
+            font-size: 15px;
+        }
+
+        @media(max-width:768px){
+            header { padding: 12px 20px; grid-template-columns: 1fr auto 1fr; }
+            .nav-links { gap: 10px; }
+            .nav-links a { font-size: 13px; }
+            .nav-actions .btn { padding: 8px 16px; font-size: 12px; }
+            .faq-hero { min-height: calc(100vh - 100px); padding: 60px 20px; }
+            .faq-hero-content h1 { font-size: 42px; }
+            .faq-section { padding: 80px 15px; }
+            .faq-heading .section-title { font-size: 38px; }
+            .faq-question { font-size: 14px; padding: 20px; }
+            .faq-cta { padding: 80px 20px; }
+            .faq-cta-content h2 { font-size: 38px; }
+        }
+
+        @media(max-width:576px){
+            .faq-hero-content h1 { font-size: 35px; }
+            .faq-hero-content p { font-size: 14px; }
+            .faq-cta-content h2 { font-size: 32px; }
+            .faq-item { border-radius: 10px; }
+            .faq-question { padding: 16px 18px; font-size: 13px; }
+            .faq-answer p { font-size: 13px; padding: 0 18px 16px; }
+            .footer-logo { font-size: 28px; }
+            .developer-name { font-size: 26px; }
+        }
+    </style>
+</head>
+<body data-page="faqs">
+
+<!-- ===== FULL PAGE VIDEO BACKGROUND ===== -->
+<video autoplay muted loop playsinline class="bg-video">
+    <source src="./videos/13430839_1920_1080_60fps.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+<div class="bg-overlay"></div>
+
+<!-- ===== ANNOUNCEMENT BAR ===== -->
+<div class="announcement-bar">
+    <div class="marquee">
+        <i class="fas fa-star"></i> Welcome to Noor e Mehal - Your Dream Wedding Planner 
+        <i class="fas fa-heart"></i> 
+        <i class="fas fa-gem"></i> Book Now & Get 10% Off on Premium Packages
+    </div>
+</div>
+
+<!-- ===== HEADER ===== -->
+<header>
+    <nav id="mainNav" class="nav-links">
+        <a href="events.html">Events</a>
+        <a href="packages.html">Packages</a>
+        <a href="services.html">Services</a>
+        <a href="about_us.html">About</a>
+        <a href="faqs.html" class="active">FAQs</a>
+        <a href="contact_us.html">Contact</a>
+    </nav>
+
+    <a href="index.html" class="logo">
+        <h1>Noor e <span>Mehal</span></h1>
+    </a>
+
+    <div class="nav-actions">
+        
+            <a href="login.html" class="btn btn-outline">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </a>
+            <a href="register.html" class="btn btn-primary">
+                <i class="fas fa-user-plus"></i> Register
+            </a>
+        
+    </div>
+</header>
+
+<!-- ===== FAQ SECTION ===== -->
+<section class="faq-section">
+    <div class="container">
+
+        <div class="faq-heading">
+            <h5 class="small-title">HAVE QUESTIONS?</h5>
+            <h2 class="section-title">Everything You Need To Know</h2>
+            <p class="section-text">Find answers to the most common questions about our wedding planning and event services.</p>
+        </div>
+
+        <div class="faq-container">
+                        <div class="faq-item">
+                <button class="faq-question">
+                    What services does Noor e Mehal offer?
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>We offer a comprehensive range of wedding services including venue decoration, catering, photography, bridal makeup, music/entertainment, and complete wedding planning packages.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question">
+                    How do I book a service?
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>Simply create an account on our website, browse our services, and click "Book Now" on your preferred service. You can also contact us directly for personalized assistance.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question">
+                    Can I customize my wedding package?
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>Absolutely! We understand that every wedding is unique. Our team works with you to create a customized package that fits your vision, preferences, and budget.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question">
+                    How far in advance should I book?
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>We recommend booking at least 3-6 months in advance for major events and 1-2 months for smaller services. This ensures availability of your preferred vendors and venues.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question">
+                    What is the payment process?
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>We require a 30% advance payment to confirm your booking, with the remaining balance due 2 weeks before your event. We accept bank transfers and cash payments.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question">
+                    Do you offer international wedding planning?
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>Yes, we offer destination wedding planning services. Contact our team to discuss your requirements and we'll create a customized plan for your international wedding.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question">
+                    Can I see examples of your work?
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>Yes! Visit our events page to see photos and details of weddings we've planned. We also share client testimonials and galleries on our social media channels.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question">
+                    What if I need to cancel or reschedule?
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>We understand that plans can change. We have a flexible cancellation policy. Please contact us directly to discuss your situation and we'll work with you to find a solution.</p>
+                </div>
+            </div>
+            
+        </div>
+
+    </div>
+</section>
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+    const faqQuestions = document.querySelectorAll(".faq-question");
+
+    faqQuestions.forEach(function(question){
+        question.addEventListener("click", function(){
+            const currentItem = this.closest(".faq-item");
+            const currentAnswer = currentItem.querySelector(".faq-answer");
+
+            document.querySelectorAll(".faq-item").forEach(function(item){
+                if(item !== currentItem){
+                    item.classList.remove("active");
+                    const answer = item.querySelector(".faq-answer");
+                    answer.style.maxHeight = null;
+                }
+            });
+
+            currentItem.classList.toggle("active");
+
+            if(currentItem.classList.contains("active")){
+                currentAnswer.style.maxHeight = currentAnswer.scrollHeight + "px";
+            }else{
+                currentAnswer.style.maxHeight = null;
+            }
+        });
+    });
+});
+</script>
+
+<!-- ===== FAQ CTA ===== -->
+<section class="faq-cta">
+    <div class="container">
+        <div class="faq-cta-content">
+            <h5>STILL HAVE QUESTIONS?</h5>
+            <h2>Let's Make Your <span>Dream Wedding</span> A Reality</h2>
+            <p>Our team is here to help you with every question and detail related to your special celebration.</p>
+            <a href="contact_us.html" class="faq-cta-btn">
+                Contact Us <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="about-footer">
+    <div class="container">
+        <div class="row align-items-center gy-4">
+            <div class="col-lg-6">
+                <h2 class="footer-logo">Noor-E-Mahal</h2>
+                <p class="footer-text">Noor-E-Mahal is dedicated to creating unforgettable wedding experiences through luxury planning, elegant decoration and exceptional service.</p>
+            </div>
+            <div class="col-lg-6 text-lg-end">
+                <h5 class="developer-title">Developed By</h5>
+                <h3 class="developer-name">INSHAL AKBER</h3>
+                <p class="developer-role">Full Stack Web Developer</p>
+            </div>
+        </div>
+        <hr>
+        <div class="copyright">© 2026 Noor-E-Mahal | All Rights Reserved.</div>
+    </div>
+</footer>
+
+<script>
+    function toggleMenu() {
+        document.getElementById('mainNav').classList.toggle('open');
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
+
+
+

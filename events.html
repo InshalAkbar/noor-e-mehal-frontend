@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events - Noor e Mehal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #FFD700;
+            --primary-dark: #e6c200;
+            --black: #0a0a0a;
+            --black-light: #1a1a1a;
+            --gray: #888;
+            --white: #ffffff;
+            --gold: #d4af37;
+            --gold-light: #f0d77b;
+            --border: rgba(212, 175, 55, 0.22);
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--black);
+            color: var(--white);
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* ===== FULL PAGE VIDEO BACKGROUND ===== */
+        .bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+        }
+
+        .bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            z-index: -1;
+        }
+
+        /* ===== ALL SECTIONS TRANSPARENT ===== */
+        .announcement-bar,
+        header,
+        .events-hero,
+        .events-section,
+        .why-us,
+        .counter-section,
+        .gallery-section,
+        .process-section,
+        .cta-section,
+        .footer {
+            background: transparent !important;
+            backdrop-filter: blur(2px);
+        }
+
+        /* ===== ANNOUNCEMENT BAR ===== */
+        .announcement-bar {
+            background: rgba(212, 175, 55, 0.9) !important;
+            color: var(--black);
+            padding: 10px 0;
+            text-align: center;
+            font-weight: 600;
+            font-size: 14px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1001;
+        }
+        .announcement-bar .marquee {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 25s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .announcement-bar .badge-count {
+            background: var(--black);
+            color: var(--primary);
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+        .announcement-bar .approved-count {
+            background: var(--black);
+            color: var(--primary);
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+
+        /* ================= HEADER ================= */
+        header {
+            background: rgba(10, 10, 10, 0.85) !important;
+            padding: 15px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid rgba(255, 215, 0, 0.15);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 0 0 auto;
+            text-decoration: none;
+        }
+        .logo h1 {
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--white);
+            letter-spacing: -0.5px;
+            font-family: 'Cinzel', serif;
+        }
+        .logo h1 span { color: var(--gold); }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex: 1;
+        }
+        .nav-links a {
+            color: var(--gray);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            transition: all 0.3s;
+            position: relative;
+        }
+        .nav-links a:hover,
+        .nav-links a.active { color: var(--gold); }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s;
+        }
+        .nav-links a:hover::after,
+        .nav-links a.active::after { width: 100%; }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 15px;
+            flex: 1;
+        }
+        .nav-actions .btn {
+            padding: 10px 24px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-primary {
+            background: var(--gold);
+            color: var(--black);
+        }
+        .btn-primary:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.3);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--gold);
+        }
+        .btn-outline:hover {
+            background: var(--gold);
+            color: var(--black);
+        }
+        .btn-outline i { color: var(--gold); }
+        .btn-outline:hover i { color: var(--black); }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        /*==============================
+                HERO SECTION
+        ==============================*/
+        .events-hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: transparent !important;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(rgba(0,0,0,.75), rgba(0,0,0,.60));
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            padding: 12px 28px;
+            background: rgba(255,215,0,.15);
+            border: 1px solid rgba(255,215,0,.4);
+            color: #FFD700;
+            border-radius: 50px;
+            margin-bottom: 25px;
+            backdrop-filter: blur(8px);
+        }
+
+        .hero-content h1 {
+            color: #fff;
+            font-size: 70px;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 25px;
+        }
+        .hero-content h1 span { color: #FFD700; }
+        .hero-content p {
+            color: #ddd;
+            font-size: 20px;
+            max-width: 750px;
+            margin: auto;
+            line-height: 1.8;
+        }
+        .hero-buttons { margin-top: 45px; }
+
+        .btn-gold {
+            background: #FFD700;
+            color: #111;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: 700;
+            margin-right: 15px;
+            transition: .4s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-gold:hover {
+            transform: translateY(-5px);
+            background: #f4c400;
+            box-shadow: 0 20px 40px rgba(255,215,0,.35);
+        }
+        .hero-buttons .btn-outline-light {
+            padding: 15px 40px;
+            border-radius: 50px;
+            color: #fff;
+            border: 2px solid #fff;
+            text-decoration: none;
+            display: inline-block;
+            transition: .4s;
+        }
+        .hero-buttons .btn-outline-light:hover {
+            background: #FFD700;
+            border-color: #FFD700;
+            color: #111;
+        }
+
+        /*=========================
+              EVENTS
+        =========================*/
+        .events-section {
+            padding: 100px 0;
+            background: transparent !important;
+        }
+        .section-tag {
+            display: inline-block;
+            padding: 10px 25px;
+            background: rgba(255,215,0,.1);
+            border: 1px solid rgba(255,215,0,.4);
+            border-radius: 50px;
+            color: #FFD700;
+            margin-bottom: 20px;
+        }
+        .section-title {
+            font-size: 50px;
+            color: #fff;
+            font-weight: 800;
+        }
+        .section-title span { color: #FFD700; }
+        .section-desc {
+            color: #bdbdbd;
+            max-width: 700px;
+            margin: auto;
+            margin-top: 15px;
+            font-size: 18px;
+        }
+
+        /* CARD */
+        .event-card {
+            position: relative;
+            height: 470px;
+            overflow: hidden;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: .45s;
+            background: rgba(0,0,0,0.3);
+        }
+        .event-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: .6s;
+        }
+        .event-overlay {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 30px;
+            background: linear-gradient(to top, rgba(0,0,0,.9) 10%, transparent);
+            transition: .45s;
+        }
+        .event-badge {
+            display: inline-block;
+            background: #FFD700;
+            color: #111;
+            padding: 7px 18px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+        .event-overlay h3 {
+            color: #fff;
+            font-size: 30px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .event-overlay p {
+            color: #ddd;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: .45s;
+        }
+        .event-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 28px;
+            background: #FFD700;
+            color: #111;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: .45s;
+        }
+        .event-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 45px rgba(255,215,0,.35);
+            z-index: 5;
+        }
+        .event-card:hover img { transform: scale(1.18); }
+        .event-card:hover .event-overlay {
+            background: linear-gradient(to top, rgba(0,0,0,.9) 55%, transparent);
+        }
+        .event-card:hover p,
+        .event-card:hover .event-btn {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /*==============================
+              WHY CHOOSE US
+        ===============================*/
+        .why-us { padding: 100px 0; background: transparent !important; }
+        .feature-box {
+            background: rgba(255,255,255,.05);
+            padding: 45px 25px;
+            border-radius: 20px;
+            text-align: center;
+            transition: .4s;
+            border: 1px solid rgba(255,215,0,.15);
+            backdrop-filter: blur(12px);
+            height: 100%;
+        }
+        .feature-box i {
+            font-size: 45px;
+            color: #FFD700;
+            margin-bottom: 20px;
+            transition: .4s;
+        }
+        .feature-box h4 { color: #fff; margin-bottom: 15px; }
+        .feature-box p {
+            color: #cfcfcf;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+        .feature-box:hover {
+            transform: translateY(-12px);
+            background: #FFD700;
+        }
+        .feature-box:hover h4,
+        .feature-box:hover p,
+        .feature-box:hover i { color: #111; }
+
+        /*==============================
+            COUNTERS
+        ===============================*/
+        .counter-section {
+            padding: 100px 0;
+            position: relative;
+            background: transparent !important;
+        }
+        .counter-section .container { position: relative; z-index: 2; }
+        .counter-box { padding: 25px; }
+        .counter-box h2 {
+            font-size: 55px;
+            font-weight: 800;
+            color: #FFD700;
+        }
+        .counter-box span {
+            font-size: 18px;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+        /*==========================
+              LUXURY GALLERY
+        ===========================*/
+        .gallery-section { padding: 100px 0; background: transparent !important; }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            margin-top: 50px;
+        }
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            height: 320px;
+            cursor: pointer;
+            transition: .45s ease;
+            border: 2px solid transparent;
+            background: rgba(0,0,0,0.3);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: .6s ease;
+        }
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: flex-end;
+            padding: 25px;
+            background: linear-gradient(to top, rgba(0,0,0,.92), rgba(0,0,0,.20));
+            opacity: 0;
+            transition: .4s ease;
+        }
+        .gallery-content {
+            transform: translateY(40px);
+            transition: .4s ease;
+        }
+        .gallery-content h4 {
+            color: #FFD700;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .gallery-content p {
+            color: #fff;
+            font-size: 15px;
+            line-height: 1.7;
+            margin: 0;
+        }
+        .gallery-item:hover {
+            transform: translateY(-12px);
+            border-color: #FFD700;
+            box-shadow: 0 20px 45px rgba(255,215,0,.25);
+        }
+        .gallery-item:hover img { transform: scale(1.12); }
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
+        .gallery-item:hover .gallery-content { transform: translateY(0); }
+        .gallery-item::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -120%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent);
+            transform: skewX(-25deg);
+            transition: .8s;
+            z-index: 5;
+        }
+        .gallery-item:hover::before { left: 150%; }
+
+        /*=========================
+              OUR PROCESS
+        ==========================*/
+        .process-section { padding: 100px 0; background: transparent !important; }
+        .process-card {
+            background: rgba(24,24,24,0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,215,0,.15);
+            border-radius: 20px;
+            padding: 40px 25px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: .4s;
+            height: 100%;
+        }
+        .process-card:hover {
+            transform: translateY(-10px);
+            border-color: #FFD700;
+            box-shadow: 0 15px 35px rgba(255,215,0,.20);
+        }
+        .process-icon {
+            width: 80px;
+            height: 80px;
+            margin: auto;
+            border-radius: 50%;
+            background: #FFD700;
+            color: #111;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            margin-bottom: 25px;
+        }
+        .process-card h4 { color: #fff; margin-bottom: 15px; font-size: 24px; }
+        .process-card p {
+            color: #cfcfcf;
+            line-height: 1.8;
+            font-size: 15px;
+        }
+        .step {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 60px;
+            font-weight: 700;
+            color: rgba(255,215,0,.08);
+        }
+        .process-card::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 0;
+            height: 4px;
+            background: #FFD700;
+            transition: .4s;
+        }
+        .process-card:hover::before { width: 100%; }
+
+        /*=========================
+              BOOKING CTA
+        ==========================*/
+        .cta-section { padding: 100px 0; background: transparent !important; }
+        .cta-box {
+            max-width: 900px;
+            margin: auto;
+            text-align: center;
+            padding: 70px 50px;
+            border-radius: 25px;
+            background: rgba(20,20,20,0.5);
+            backdrop-filter: blur(8px);
+            border: 2px solid rgba(255,215,0,.20);
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-box::before {
+            content: "";
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            background: rgba(255,215,0,.08);
+            border-radius: 50%;
+            top: -100px;
+            right: -80px;
+        }
+        .cta-box::after {
+            content: "";
+            position: absolute;
+            width: 220px;
+            height: 220px;
+            background: rgba(255,215,0,.05);
+            border-radius: 50%;
+            bottom: -100px;
+            left: -80px;
+        }
+        .cta-box h2 {
+            color: #fff;
+            font-size: 50px;
+            margin: 20px 0;
+            position: relative;
+            z-index: 2;
+        }
+        .cta-box h2 span { color: #FFD700; }
+        .cta-box p {
+            color: #d6d6d6;
+            max-width: 650px;
+            margin: auto;
+            line-height: 1.9;
+            font-size: 17px;
+            position: relative;
+            z-index: 2;
+        }
+        .cta-buttons {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
+        }
+        .cta-buttons .btn {
+            padding: 15px 35px;
+            font-size: 16px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: .3s;
+        }
+        .cta-buttons .btn-primary {
+            background: #FFD700;
+            color: #111;
+            border: none;
+        }
+        .cta-buttons .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(255,215,0,.35);
+        }
+        .cta-buttons .btn-outline {
+            background: transparent;
+            color: #fff;
+            border: 2px solid #FFD700;
+        }
+        .cta-buttons .btn-outline:hover {
+            background: #FFD700;
+            color: #111;
+            transform: translateY(-5px);
+        }
+
+        /*=========================
+              FOOTER
+        ==========================*/
+        .footer {
+            background: rgba(9,9,9,0.9) !important;
+            padding: 90px 0 20px;
+            border-top: 2px solid rgba(255,215,0,.15);
+            backdrop-filter: blur(5px);
+        }
+        .footer-logo {
+            color: #fff;
+            font-size: 42px;
+            margin-bottom: 20px;
+            font-family: 'Cinzel', serif;
+        }
+        .footer-logo span { color: #FFD700; }
+        .footer-box p { color: #bdbdbd; line-height: 1.9; }
+        .footer-box h4 {
+            color: #FFD700;
+            margin-bottom: 25px;
+            font-size: 22px;
+        }
+        .footer-box ul { padding: 0; list-style: none; }
+        .footer-box ul li { margin-bottom: 14px; color: #cfcfcf; }
+        .footer-box ul li a {
+            color: #cfcfcf;
+            text-decoration: none;
+            transition: .3s;
+        }
+        .footer-box ul li a:hover {
+            color: #FFD700;
+            padding-left: 8px;
+        }
+        .footer-social {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        .footer-social a {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(24,24,24,0.7);
+            color: #FFD700;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            transition: .35s;
+        }
+        .footer-social a:hover {
+            background: #FFD700;
+            color: #111;
+            transform: translateY(-5px);
+        }
+        .footer hr {
+            border-color: rgba(255,255,255,.08);
+            margin: 45px 0 20px;
+        }
+        .footer-bottom { text-align: center; }
+        .footer-bottom p { color: #999; margin: 0; }
+
+        /* Responsive */
+        @media(max-width:1200px){
+            .gallery-grid { grid-template-columns: repeat(3,1fr); }
+        }
+        @media(max-width:991px){
+            .hero-content h1 { font-size: 50px; }
+            .gallery-grid { grid-template-columns: repeat(2,1fr); }
+        }
+        @media(max-width:768px){
+            header { padding: 12px 20px; flex-wrap: wrap; }
+            .nav-links { order: 3; flex: 0 0 100%; justify-content: center; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
+            .nav-links a { font-size: 13px; }
+            .nav-actions .btn { padding: 8px 16px; font-size: 12px; }
+            .hero-content h1 { font-size: 38px; }
+            .hero-content p { font-size: 17px; }
+            .hero-buttons .btn { display: block; margin: 10px auto; width: 220px; }
+            .section-title { font-size: 36px; }
+            .section-desc { font-size: 15px; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .gallery-item { height: 280px; }
+            .cta-box { padding: 50px 25px; }
+            .cta-box h2 { font-size: 34px; }
+            .cta-buttons { flex-direction: column; align-items: center; }
+            .footer { text-align: center; }
+            .footer-social { justify-content: center; }
+            .footer-logo { font-size: 34px; }
+            .events-hero { min-height: 80vh; }
+        }
+        @media(max-width:576px){
+            .hero-content h1 { font-size: 32px; }
+            .process-card { margin-bottom: 20px; }
+            .process-icon { width: 70px; height: 70px; font-size: 26px; }
+            .gallery-item { height: 220px; }
+            .event-card { height: 350px; }
+            .event-overlay h3 { font-size: 22px; }
+            .counter-box h2 { font-size: 40px; }
+        }
+    </style>
+</head>
+<body data-page="events">
+
+<!-- ===== FULL PAGE VIDEO BACKGROUND ===== -->
+<video autoplay muted loop playsinline class="bg-video">
+    <source src="./videos/13430839_1920_1080_60fps.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+<div class="bg-overlay"></div>
+
+<!-- ===== ANNOUNCEMENT BAR ===== -->
+<div class="announcement-bar">
+    <div class="marquee">
+        <i class="fas fa-star"></i> Welcome to Noor e Mehal - Your Dream Wedding Planner 
+        <i class="fas fa-heart"></i> 
+        <span class="approved-count">✅ 6 Approved Events</span>
+        <i class="fas fa-gem"></i> Book Now & Get 10% Off on Premium Packages
+        <i class="fas fa-calendar-check"></i> Create Your Dream Event Today
+    </div>
+</div>
+
+<!-- ===== HEADER ===== -->
+<header>
+    <nav id="mainNav" class="nav-links">
+        <a href="events.html" class="active">Events</a>
+        <a href="packages.html">Packages</a>
+        <a href="services.html">Services</a>
+        <a href="about_us.html">About</a>
+        <a href="faqs.html">FAQs</a>
+        <a href="contact_us.html">Contact</a>
+    </nav>
+
+    <a href="index.html" class="logo">
+        <h1>Noor e <span>Mehal</span></h1>
+    </a>
+
+    <div class="nav-actions">
+        
+            <a href="login.html" class="btn btn-outline">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </a>
+            <a href="register.html" class="btn btn-primary">
+                <i class="fas fa-user-plus"></i> Register
+            </a>
+        
+    </div>
+</header>
+<section class="events-section py-5" id="events">
+    <div class="container">
+        <div class="text-center mb-5">
+            <span class="section-tag">Our Premium Events</span>
+            <h2 class="section-title">Celebrate Every Moment With <span>Noor e Mehal</span></h2>
+            <p class="section-desc">From intimate gatherings to grand celebrations, we create unforgettable memories with elegance and perfection.</p>
+        </div>
+
+        <div class="row g-4">
+            <!-- Wedding -->
+            <div class="col-lg-4 col-md-6">
+                <div class="event-card">
+                    <img src="./images/weddingpic.jpg" alt="">
+                    <div class="event-overlay">
+                        <span class="event-badge">Luxury</span>
+                        <h3>Wedding Ceremony</h3>
+                        <p>Elegant wedding planning with royal décor, floral themes and premium hospitality.</p>
+                        <a href="services.html" class="event-btn">Explore</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Mehndi -->
+            <div class="col-lg-4 col-md-6">
+                <div class="event-card">
+                    <img src="./images/mehendipic.jpg" alt="">
+                    <div class="event-overlay">
+                        <span class="event-badge">Popular</span>
+                        <h3>Mehndi Night</h3>
+                        <p>Vibrant colors, live music, traditional décor and unforgettable celebrations.</p>
+                        <a href="services.html" class="event-btn">Explore</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Barat -->
+            <div class="col-lg-4 col-md-6">
+                <div class="event-card">
+                    <img src="./images/barat1.jpg" alt="">
+                    <div class="event-overlay">
+                        <span class="event-badge">Royal</span>
+                        <h3>Barat Event</h3>
+                        <p>Luxury venue styling with majestic entrances and premium guest arrangements.</p>
+                        <a href="services.html" class="event-btn">Explore</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Walima -->
+            <div class="col-lg-4 col-md-6">
+                <div class="event-card">
+                    <img src="./images/walima2.jpg" alt="">
+                    <div class="event-overlay">
+                        <span class="event-badge">Elegant</span>
+                        <h3>Walima Reception</h3>
+                        <p>Sophisticated ambience with elegant lighting and luxurious seating.</p>
+                        <a href="services.html" class="event-btn">Explore</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Birthday -->
+            <div class="col-lg-4 col-md-6">
+                <div class="event-card">
+                    <img src="./images/birthday.jpg" alt="">
+                    <div class="event-overlay">
+                        <span class="event-badge">Fun</span>
+                        <h3>Birthday Party</h3>
+                        <p>Creative themes, exciting decorations and joyful celebrations for all ages.</p>
+                        <a href="services.html" class="event-btn">Explore</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Engagement -->
+            <div class="col-lg-4 col-md-6">
+                <div class="event-card">
+                    <img src="./images/ring2.jpg" alt="">
+                    <div class="event-overlay">
+                        <span class="event-badge">Special</span>
+                        <h3>Engagement</h3>
+                        <p>Celebrate your beginning with luxurious décor and unforgettable moments.</p>
+                        <a href="services.html" class="event-btn">Explore</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== WHY CHOOSE US ===== -->
+<section class="why-us py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <span class="section-tag">Why Choose Us</span>
+            <h2 class="section-title">Luxury Wedding Experience</h2>
+            <p class="section-desc">We don't just organize events—we create unforgettable memories with elegance, perfection and royal hospitality.</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="feature-box">
+                    <i class="fa-solid fa-crown"></i>
+                    <h4>Royal Decoration</h4>
+                    <p>Luxury floral themes with elegant stage designs.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="feature-box">
+                    <i class="fa-solid fa-utensils"></i>
+                    <h4>Premium Catering</h4>
+                    <p>Delicious cuisine prepared by professional chefs.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="feature-box">
+                    <i class="fa-solid fa-camera"></i>
+                    <h4>Photography</h4>
+                    <p>Capture every beautiful moment in cinematic style.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="feature-box">
+                    <i class="fa-solid fa-music"></i>
+                    <h4>Live Entertainment</h4>
+                    <p>Professional DJ, Qawwali and live performances.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== COUNTERS ===== -->
+<section class="counter-section">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-3 col-6">
+                <div class="counter-box">
+                    <h2>500+</h2>
+                    <span>Events</span>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="counter-box">
+                    <h2>15+</h2>
+                    <span>Years</span>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="counter-box">
+                    <h2>1200+</h2>
+                    <span>Happy Clients</span>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="counter-box">
+                    <h2>5★</h2>
+                    <span>Ratings</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== GALLERY ===== -->
+<section class="gallery-section py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <span class="section-tag">Our Gallery</span>
+            <h2 class="section-title">Beautiful <span>Wedding Moments</span></h2>
+            <p class="section-desc">Every picture tells a story of elegance, celebration and unforgettable memories.</p>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="./images/gallerypic2.jpg" alt="Wedding Ceremony">
+                <div class="gallery-overlay">
+                    <div class="gallery-content">
+                        <h4>Wedding Ceremony</h4>
+                        <p>Luxury décor with unforgettable memories.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="./images/gallerypics.jpg" alt="Royal Reception">
+                <div class="gallery-overlay">
+                    <div class="gallery-content">
+                        <h4>Bride Entry</h4>
+                        <p>Celebrate every moment with elegance.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="./images/haldi2.jpg" alt="Haldi Ceremony">
+                <div class="gallery-overlay">
+                    <div class="gallery-content">
+                        <h4>Haldi Ceremony</h4>
+                        <p>Filled with traditions, joy and happiness.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="./images/mehendi1.jpg" alt="Mehndi Night">
+                <div class="gallery-overlay">
+                    <div class="gallery-content">
+                        <h4>Mehndi Night</h4>
+                        <p>Music, dance and colorful celebrations.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="./images/nikkah2.jpg" alt="Nikkah Ceremony">
+                <div class="gallery-overlay">
+                    <div class="gallery-content">
+                        <h4>Nikkah Ceremony</h4>
+                        <p>A beautiful beginning of a new journey.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="./images/ring1.jpg" alt="Ring Ceremony">
+                <div class="gallery-overlay">
+                    <div class="gallery-content">
+                        <h4>Ring Ceremony</h4>
+                        <p>Celebrate love with timeless elegance.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="./images/birthdaydecor.jpg" alt="Birthday Decoration">
+                <div class="gallery-overlay">
+                    <div class="gallery-content">
+                        <h4>Birthday Decoration</h4>
+                        <p>Every detail crafted with perfection.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="./images/specialmoments.jpg" alt="Special Moments">
+                <div class="gallery-overlay">
+                    <div class="gallery-content">
+                        <h4>Special Moments</h4>
+                        <p>Creating memories you'll cherish forever.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== OUR PROCESS ===== -->
+<section class="process-section">
+    <div class="container">
+        <div class="text-center mb-5">
+            <span class="section-tag">How We Work</span>
+            <h2 class="section-title">Our <span>Simple Process</span></h2>
+            <p class="section-desc">From planning to celebration, we take care of every detail to make your special day unforgettable.</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="process-card">
+                    <div class="process-icon"><i class="fas fa-calendar-check"></i></div>
+                    <h4>Book Event</h4>
+                    <p>Choose your favorite package and confirm your booking with ease.</p>
+                    <span class="step">01</span>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="process-card">
+                    <div class="process-icon"><i class="fas fa-comments"></i></div>
+                    <h4>Planning</h4>
+                    <p>We discuss every detail to create your dream wedding event.</p>
+                    <span class="step">02</span>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="process-card">
+                    <div class="process-icon"><i class="fas fa-gem"></i></div>
+                    <h4>Decoration</h4>
+                    <p>Our team designs a luxurious venue with elegant décor.</p>
+                    <span class="step">03</span>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="process-card">
+                    <div class="process-icon"><i class="fas fa-heart"></i></div>
+                    <h4>Celebrate</h4>
+                    <p>Enjoy your memorable day while we handle everything perfectly.</p>
+                    <span class="step">04</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-box">
+            <span class="section-tag">Ready To Celebrate?</span>
+            <h2>Let's Make Your <span>Dream Wedding</span> Come True</h2>
+            <p>Noor e Mehal specializes in creating luxurious wedding events with stunning decorations, premium services and unforgettable memories.</p>
+            <div class="cta-buttons">
+                <a href="packages.html" class="btn btn-primary"><i class="fas fa-gem"></i> View Packages</a>
+                <a href="contact_us.html" class="btn btn-outline"><i class="fas fa-phone"></i> Contact Us</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+    <div class="container">
+        <div class="row gy-5">
+            <div class="col-lg-4 col-md-6">
+                <div class="footer-box">
+                    <h2 class="footer-logo">Noor e <span>Mehal</span></h2>
+                    <p>Noor e Mehal is dedicated to creating luxurious weddings and unforgettable celebrations. From elegant décor to flawless event management, we make every moment magical.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-6">
+                <div class="footer-box">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="packages.html">Packages</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="about_us.html">About Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="footer-box">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li>Nikkah Ceremony</li>
+                        <li>Mehndi Event</li>
+                        <li>Walima Reception</li>
+                        <li>Luxury Decoration</li>
+                        <li>Photography</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="footer-box">
+                    <h4>Contact Us</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Karachi, Pakistan</p>
+                    <p><i class="fas fa-phone"></i> +92 300 1234567</p>
+                    <p><i class="fas fa-envelope"></i> info@nooremehal.com</p>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="footer-bottom">
+            <p>© 2026 Noor e Mehal. All Rights Reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    function toggleMenu() {
+        document.getElementById('mainNav').classList.toggle('open');
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
+
+
+

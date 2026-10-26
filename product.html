@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Planning | Noor-E-Mahal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --gold: #d4af37; --gold-light: #f0d77b; --black: #0a0a0a; --white: #ffffff; --gray: #999999; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+        }
+        a { text-decoration: none; }
+        body {
+            background-image: url('./images/wedplaning.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            transition: background-image 0.5s ease;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.82);
+            z-index: -1;
+        }
+        .product-hero {
+            min-height: 40vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 80px 20px 40px;
+            background: transparent !important;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            padding: 40px 20px;
+        }
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(38px, 5vw, 58px);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 15px;
+            color: #fff;
+            text-shadow: 0 4px 40px rgba(0,0,0,0.8);
+        }
+        .hero-content .hero-sub {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: clamp(16px, 1.8vw, 22px);
+            max-width: 700px;
+            margin: auto;
+            line-height: 1.8;
+            text-shadow: 0 2px 30px rgba(0,0,0,0.8);
+        }
+        .hero-details {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px 40px;
+            margin-top: 25px;
+            padding: 20px 30px;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            border: 1px solid rgba(212,175,55,0.15);
+        }
+        .hero-detail-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #e0e0e0;
+            font-size: 14px;
+        }
+        .hero-detail-item i {
+            color: var(--gold);
+            font-size: 18px;
+            width: 20px;
+        }
+        .hero-detail-item span { color: #fff; font-weight: 500; }
+        .hero-rating { margin-top: 15px; color: var(--gold); font-size: 18px; }
+        .hero-rating span { color: #fff; font-size: 14px; margin-left: 10px; }
+        .back-link { margin-top: 20px; }
+        .back-link a { color: var(--gold); font-size: 14px; transition: 0.3s; display: inline-flex; align-items: center; gap: 8px; }
+        .back-link a:hover { color: #fff; }
+        .section-title { text-align: center; margin-bottom: 50px; }
+        .section-title span { color: var(--gold); font-size: 13px; letter-spacing: 4px; text-transform: uppercase; font-weight: 600; }
+        .section-title h2 { font-family: 'Playfair Display', serif; font-size: 40px; color: #fff; margin: 10px 0; }
+        .section-title h2 span { color: var(--gold); position: relative; }
+        .section-title p { color: #ccc; font-size: 16px; max-width: 600px; margin: 0 auto; }
+        .products-section { padding: 60px 8% 100px; background: transparent !important; }
+        .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; max-width: 1300px; margin: 0 auto; }
+        .product-card {
+            position: relative;
+            background: rgba(20, 20, 20, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+        .product-card:hover {
+            transform: translateY(-15px);
+            border-color: var(--gold);
+            box-shadow: 0 30px 80px rgba(212, 175, 55, 0.15);
+        }
+        .product-image {
+            position: relative;
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+            background: #111;
+        }
+        .product-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .card-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4px 15px;
+            padding: 12px 20px;
+            background: rgba(0,0,0,0.3);
+            border-bottom: 1px solid rgba(212,175,55,0.08);
+        }
+        .card-detail { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #bbb; }
+        .card-detail i { color: var(--gold); font-size: 12px; width: 16px; }
+        .card-detail strong { color: #fff; font-weight: 500; }
+        .product-content { padding: 20px 25px 25px; }
+        .product-content h3 { font-family: 'Playfair Display', serif; font-size: 20px; color: #fff; margin-bottom: 6px; }
+        .product-content .product-desc { color: #aaa; font-size: 13px; line-height: 1.6; margin-bottom: 10px; }
+        .product-rating { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+        .product-rating .stars { color: var(--gold); font-size: 14px; }
+        .product-rating .rating-num { color: #fff; font-size: 13px; font-weight: 600; background: rgba(0,0,0,0.5); padding: 2px 10px; border-radius: 12px; }
+        .product-features { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 15px; }
+        .product-features span { background: rgba(212, 175, 55, 0.08); border: 1px solid rgba(212, 175, 55, 0.12); color: #ddd; font-size: 11px; padding: 3px 12px; border-radius: 12px; font-weight: 400; }
+        .product-price { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: var(--gold); margin-bottom: 15px; }
+        .btn-book {
+            display: block;
+            width: 100%;
+            padding: 14px 20px;
+            background: linear-gradient(135deg, #d4af37, #f0d77b);
+            color: #000;
+            border: none;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+            letter-spacing: 0.5px;
+        }
+        .btn-book i { margin-right: 8px; }
+        .btn-book:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 10px 35px rgba(212, 175, 55, 0.5); }
+        .live-booking {
+            position: fixed;
+            left: 30px;
+            bottom: 30px;
+            width: 340px;
+            background: #121212;
+            border: 1px solid rgba(212, 175, 55, 0.18);
+            border-radius: 18px;
+            padding: 18px;
+            display: none;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.45);
+            z-index: 99999;
+            animation: popupIn 0.6s;
+        }
+        .live-booking.show { display: flex; }
+        @keyframes popupIn { from { opacity: 0; transform: translateY(80px); } to { opacity: 1; transform: translateY(0); } }
+        .live-image img { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid #d4af37; }
+        .live-content { flex: 1; }
+        .live-content h4 { color: #fff; font-size: 16px; margin-bottom: 4px; }
+        .live-content p { color: #d4af37; font-size: 14px; margin-bottom: 6px; }
+        .live-content span { font-size: 12px; color: #999; }
+        .live-close { cursor: pointer; color: #777; transition: 0.3s; }
+        .live-close:hover { color: #fff; }
+        .recent-section { padding: 80px 0; background: transparent !important; }
+        .recent-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 50px; }
+        .recent-card {
+            background: rgba(20,20,20,0.6);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(212,175,55,0.15);
+            transition: 0.35s;
+            text-decoration: none;
+            display: block;
+        }
+        .recent-card:hover { transform: translateY(-10px); border-color: #d4af37; box-shadow: 0 20px 40px rgba(212,175,55,0.18); }
+        .recent-card img { width: 100%; height: 200px; object-fit: cover; transition: 0.5s; }
+        .recent-card:hover img { transform: scale(1.08); }
+        .recent-card h3 { padding: 20px; text-align: center; color: #fff; font-family: 'Playfair Display', serif; font-size: 18px; }
+        .wishlist-area { margin: 25px 0; text-align: center; }
+        .wishlist-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 28px;
+            background: rgba(20,20,20,0.6);
+            border: 1px solid rgba(212,175,55,0.2);
+            border-radius: 50px;
+            color: #fff;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.35s;
+        }
+        .wishlist-btn i { font-size: 20px; color: #d4af37; transition: 0.35s; }
+        .wishlist-btn:hover { transform: translateY(-4px); border-color: #d4af37; box-shadow: 0 15px 35px rgba(212,175,55,0.15); }
+        .wishlist-btn.active { background: #d4af37; color: #111; }
+        .wishlist-btn.active i { color: #111; }
+        .share-section { margin-top: 45px; padding: 35px; background: rgba(20,20,20,0.6); border-radius: 22px; border: 1px solid rgba(212,175,55,0.15); text-align: center; }
+        .share-section h3 { font-family: 'Playfair Display', serif; font-size: 28px; color: #fff; margin-bottom: 25px; }
+        .share-buttons { display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; }
+        .share-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 18px;
+            border-radius: 18px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.35s;
+            cursor: pointer;
+            border: none;
+        }
+        .share-btn i { font-size: 28px; margin-bottom: 12px; }
+        .whatsapp { background: #25D366; color: #fff; }
+        .facebook { background: #1877F2; color: #fff; }
+        .instagram { background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); color: #fff; }
+        .email { background: #444; color: #fff; }
+        .copy { background: #d4af37; color: #111; }
+        .share-btn:hover { transform: translateY(-8px); box-shadow: 0 15px 35px rgba(0,0,0,0.3); }
+        .luxury-footer {
+            background: rgba(8, 8, 8, 0.9);
+            padding: 60px 0 30px;
+            border-top: 1px solid rgba(212,175,55,0.12);
+            margin-top: 60px;
+        }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 40px; margin-bottom: 40px; }
+        .footer-box h2 { font-family: 'Playfair Display', serif; color: #d4af37; margin-bottom: 20px; font-size: 34px; }
+        .footer-box h3 { color: #fff; margin-bottom: 20px; font-size: 22px; }
+        .footer-box p { color: #bdbdbd; line-height: 1.8; }
+        .footer-box ul { list-style: none; padding: 0; }
+        .footer-box ul li { margin-bottom: 15px; color: #bdbdbd; }
+        .footer-box ul li a { color: #bdbdbd; text-decoration: none; transition: 0.3s; }
+        .footer-box ul li a:hover { color: #d4af37; padding-left: 8px; }
+        .footer-social { display: flex; gap: 15px; margin-top: 25px; }
+        .footer-social a { width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; background: rgba(20,20,20,0.6); border-radius: 50%; color: #d4af37; transition: 0.35s; }
+        .footer-social a:hover { background: #d4af37; color: #111; transform: translateY(-6px); }
+        .footer-bottom { border-top: 1px solid rgba(212,175,55,0.12); padding-top: 25px; text-align: center; color: #999; font-size: 14px; }
+        @media (max-width: 992px) { .products-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 768px) {
+            .products-grid { grid-template-columns: 1fr; }
+            .section-title h2 { font-size: 30px; }
+            .product-image { height: 180px; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .live-booking { left: 15px; right: 15px; bottom: 15px; width: auto; }
+            .share-buttons { grid-template-columns: repeat(2, 1fr); }
+            .hero-details { flex-direction: column; align-items: center; gap: 10px; padding: 15px; }
+            .card-details { grid-template-columns: 1fr; gap: 4px; }
+        }
+        @media (max-width: 576px) { .products-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body data-page="product">
+
+<!-- ===== PRODUCT HERO ===== -->
+<section class="product-hero">
+    <div class="hero-content">
+        <h1 id="pgTitle">Wedding Planning</h1>
+        <p class="hero-sub" id="pgSubtitle">Complete Wedding Planning Services</p>
+        <div class="hero-details">
+            <div class="hero-detail-item"><i class="fas fa-users"></i><span id="pgGuests">100-2000+ Guests</span></div>
+            <div class="hero-detail-item"><i class="fas fa-expand"></i><span id="pgCapacity">Any Size</span></div>
+            <div class="hero-detail-item"><i class="fas fa-clock"></i><span id="pgTiming">Full Day Coverage</span></div>
+            <div class="hero-detail-item"><i class="fas fa-location-dot"></i><span id="pgLocation">Worldwide</span></div>
+            <div class="hero-detail-item"><i class="fas fa-tag"></i><span id="pgType">Planning Service</span></div>
+        </div>
+        <div class="hero-rating">★★★★★ <span id="pgRating">5.0 Rating</span></div>
+        <div class="back-link"><a id="pgBack" href="detail.html?id=1"><i class="fas fa-arrow-left"></i> Back to Wedding Planning</a></div>
+    </div>
+</section>
+
+<!-- ===== PRODUCT CARDS ===== -->
+<section class="products-section">
+    <div class="section-title">
+        <span>Premium Selection</span>
+        <h2>Choose Your <span>Luxury</span> Experience</h2>
+        <p id="pgIntro">Select from our premium options for your special day.</p>
+    </div>
+    <div class="products-grid" id="productsGrid"></div>
+</section>
+
+<!-- ===== RECENTLY VIEWED ===== -->
+<section class="recent-section">
+    <div class="container" style="max-width:1300px; margin:0 auto; padding:0 20px;">
+        <div class="section-title">
+            <span>Your History</span>
+            <h2>Recently Viewed</h2>
+            <p>Continue exploring the wedding venues you recently visited.</p>
+        </div>
+        <div class="recent-grid" id="recentGrid"></div>
+    </div>
+</section>
+
+<!-- ===== WISHLIST ===== -->
+<div class="container" style="max-width:1300px; margin:0 auto; padding:0 20px;">
+    <div class="wishlist-area">
+        <button id="wishlistBtn" class="wishlist-btn"><i class="far fa-heart"></i><span>Add to Wishlist</span></button>
+    </div>
+</div>
+
+<!-- ===== SHARE SECTION ===== -->
+<div class="container" style="max-width:1300px; margin:0 auto; padding:0 20px;">
+    <div class="share-section">
+        <h3>Share This Venue</h3>
+        <div class="share-buttons">
+            <a href="#" class="share-btn whatsapp"><i class="fab fa-whatsapp"></i><span>WhatsApp</span></a>
+            <a href="#" class="share-btn facebook"><i class="fab fa-facebook-f"></i><span>Facebook</span></a>
+            <a href="#" class="share-btn instagram"><i class="fab fa-instagram"></i><span>Instagram</span></a>
+            <a href="#" class="share-btn email"><i class="fas fa-envelope"></i><span>Email</span></a>
+            <button id="copyLink" class="share-btn copy"><i class="fas fa-link"></i><span>Copy Link</span></button>
+        </div>
+    </div>
+</div>
+
+<!-- ===== LIVE BOOKING POPUP ===== -->
+<div class="live-booking" id="liveBooking">
+    <div class="live-image"><img id="bookingImage" src="images/users/user1.jpg" alt="User"></div>
+    <div class="live-content">
+        <h4 id="bookingName">Ahmed Khan</h4>
+        <p id="bookingText">Booked Royal Ballroom</p>
+        <span id="bookingTime">2 minutes ago</span>
+    </div>
+    <div class="live-close" onclick="closeBooking()"><i class="fas fa-times"></i></div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer class="luxury-footer">
+    <div class="container" style="max-width:1300px; margin:0 auto; padding:0 20px;">
+        <div class="footer-grid">
+            <div class="footer-box">
+                <h2>Noor-E-Mahal</h2>
+                <p>Luxury Wedding Planner creating unforgettable wedding experiences with elegance, creativity and perfection.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-box">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="about_us.html">About Us</a></li>
+                    <li><a href="contact_us.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-box">
+                <h3>Contact</h3>
+                <ul>
+                    <li><i class="fas fa-phone"></i> +92 300 1234567</li>
+                    <li><i class="fas fa-envelope"></i> info@nooremahal.com</li>
+                    <li><i class="fas fa-location-dot"></i> Karachi, Pakistan</li>
+                </ul>
+            </div>
+            <div class="footer-box">
+                <h3>Newsletter</h3>
+                <p>Subscribe to receive wedding tips and exclusive offers.</p>
+                <form class="newsletter" style="display:flex; flex-direction:column; gap:15px; margin-top:20px;">
+                    <input type="email" placeholder="Enter Email" style="padding:14px; background:rgba(20,20,20,0.6); border:1px solid rgba(212,175,55,0.15); border-radius:12px; color:#fff;">
+                    <button style="padding:14px; background:#d4af37; border:none; border-radius:50px; font-weight:700; cursor:pointer; transition:0.35s;">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom"><p>© <span class="js-year">2026</span> Noor-E-Mahal. All Rights Reserved.</p></div>
+    </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/pages.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const bookings = [
+        { name: "Ahmed Khan", text: "Booked Royal Ballroom", time: "2 minutes ago", image: "images/users/user1.jpg" },
+        { name: "Fatima Ali", text: "Reserved Luxury Hall", time: "5 minutes ago", image: "images/users/user2.jpg" },
+        { name: "Usman Malik", text: "Booked Outdoor Garden", time: "8 minutes ago", image: "images/users/user3.jpg" },
+        { name: "Ayesha Noor", text: "Reserved Premium Catering", time: "12 minutes ago", image: "images/users/user4.jpg" },
+        { name: "Hassan Ahmed", text: "Booked Wedding Decoration", time: "18 minutes ago", image: "images/users/user5.jpg" }
+    ];
+    let index = 0;
+    const liveBooking = document.getElementById('liveBooking');
+    function showBooking() {
+        if (!liveBooking) return;
+        const b = bookings[index];
+        document.getElementById('bookingName').innerHTML = b.name;
+        document.getElementById('bookingText').innerHTML = b.text;
+        document.getElementById('bookingTime').innerHTML = b.time;
+        document.getElementById('bookingImage').src = b.image;
+        liveBooking.classList.add('show');
+        liveBooking.style.display = 'flex';
+        index++;
+        if (index >= bookings.length) index = 0;
+        setTimeout(() => { liveBooking.classList.remove('show'); liveBooking.style.display = 'none'; }, 5000);
+    }
+    window.closeBooking = function() {
+        const el = document.getElementById('liveBooking');
+        if (el) { el.classList.remove('show'); el.style.display = 'none'; }
+    };
+    setTimeout(showBooking, 1000);
+    setInterval(showBooking, 10000);
+    const currentProduct = {
+        title: PAGE.title,
+        image: PAGE.image,
+        link: window.location.href
+    };
+    const fallbackImage = PAGE.fallback;
+    let viewed = JSON.parse(localStorage.getItem('recentProducts')) || [];
+    viewed = viewed.filter(p => p.title !== currentProduct.title);
+    viewed.unshift(currentProduct);
+    if (viewed.length > 6) viewed.pop();
+    localStorage.setItem('recentProducts', JSON.stringify(viewed));
+    const grid = document.getElementById('recentGrid');
+    if (grid) {
+        grid.innerHTML = '';
+        viewed.forEach(item => {
+            grid.innerHTML += `<a href="${item.link}" class="recent-card"><img src="${item.image}" alt="${item.title}" onerror="this.onerror=null; this.src='${fallbackImage}';"><h3>${item.title}</h3></a>`;
+        });
+    }
+    const wishBtn = document.getElementById('wishlistBtn');
+    const productTitle = PAGE.title;
+    if (wishBtn) {
+        let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+        if (wishlist.includes(productTitle)) {
+            wishBtn.classList.add('active');
+            wishBtn.innerHTML = '<i class="fas fa-heart"></i><span>Saved</span>';
+        }
+        wishBtn.onclick = function() {
+            if (!wishlist.includes(productTitle)) {
+                wishlist.push(productTitle);
+                localStorage.setItem('wishlist', JSON.stringify(wishlist));
+                wishBtn.classList.add('active');
+                wishBtn.innerHTML = '<i class="fas fa-heart"></i><span>Saved</span>';
+            } else {
+                wishlist = wishlist.filter(item => item !== productTitle);
+                localStorage.setItem('wishlist', JSON.stringify(wishlist));
+                wishBtn.classList.remove('active');
+                wishBtn.innerHTML = '<i class="far fa-heart"></i><span>Add to Wishlist</span>';
+            }
+        };
+    }
+    const pageURL = window.location.href;
+    document.querySelector('.whatsapp').href = "https://wa.me/?text=" + encodeURIComponent(pageURL);
+    document.querySelector('.facebook').href = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(pageURL);
+    document.querySelector('.email').href = "mailto:?subject=Check this Wedding Venue&body=" + encodeURIComponent(pageURL);
+    document.querySelector('.instagram').onclick = function(e) { e.preventDefault(); alert("Instagram direct sharing is not supported. Please copy the link and share it."); };
+    document.getElementById('copyLink').onclick = function() {
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(pageURL).then(() => {
+                this.innerHTML = '<i class="fas fa-check"></i><span>Copied</span>';
+                setTimeout(() => { this.innerHTML = '<i class="fas fa-link"></i><span>Copy Link</span>'; }, 2000);
+            });
+        } else {
+            const input = document.createElement('input');
+            input.value = pageURL;
+            document.body.appendChild(input);
+            input.select();
+            document.execCommand('copy');
+            document.body.removeChild(input);
+            this.innerHTML = '<i class="fas fa-check"></i><span>Copied</span>';
+            setTimeout(() => { this.innerHTML = '<i class="fas fa-link"></i><span>Copy Link</span>'; }, 2000);
+        }
+    };
+});
+</script>
+<script src="js/main.js"></script>
+</body>
+</html>
+
+
+

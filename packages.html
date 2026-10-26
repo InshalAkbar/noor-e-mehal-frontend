@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Packages - Noor e Mehal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #FFD700;
+            --primary-dark: #e6c200;
+            --black: #0a0a0a;
+            --black-light: #1a1a1a;
+            --gray: #888;
+            --white: #ffffff;
+            --gold: #d4af37;
+            --gold-light: #f0d77b;
+            --border: rgba(212, 175, 55, 0.22);
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--black);
+            color: var(--white);
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* ===== FULL PAGE VIDEO BACKGROUND ===== */
+        .bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+        }
+
+        .bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            z-index: -1;
+        }
+
+        /* ===== ALL SECTIONS TRANSPARENT ===== */
+        .announcement-bar,
+        header,
+        .packages-hero,
+        .packages-section,
+        .comparison-section,
+        .why-packages,
+        .faq-section,
+        .package-cta,
+        .about-footer {
+            background: transparent !important;
+            backdrop-filter: blur(2px);
+        }
+
+        .announcement-bar {
+            background: rgba(212, 175, 55, 0.9) !important;
+            color: var(--black);
+            padding: 10px 0;
+            text-align: center;
+            font-weight: 600;
+            font-size: 14px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1001;
+        }
+        .announcement-bar .marquee {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 25s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .announcement-bar .badge-count {
+            background: var(--black);
+            color: var(--primary);
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+
+        /* ================= HEADER ================= */
+        header {
+            background: rgba(10, 10, 10, 0.85) !important;
+            padding: 15px 40px;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid rgba(255, 215, 0, 0.15);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            justify-self: center;
+            font-family: 'Cinzel', serif;
+        }
+        .logo h1 {
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--white);
+            letter-spacing: -0.5px;
+        }
+        .logo h1 span { color: var(--gold); }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            justify-self: start;
+        }
+        .nav-links a {
+            color: var(--gray);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            transition: .3s;
+            position: relative;
+        }
+        .nav-links a:hover,
+        .nav-links a.active { color: var(--gold); }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: .3s;
+        }
+        .nav-links a:hover::after,
+        .nav-links a.active::after { width: 100%; }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            justify-self: end;
+            gap: 15px;
+        }
+        .nav-actions .btn {
+            padding: 10px 24px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: .3s;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-primary {
+            background: var(--gold);
+            color: var(--black);
+        }
+        .btn-primary:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.3);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--gold);
+        }
+        .btn-outline:hover {
+            background: var(--gold);
+            color: var(--black);
+        }
+        .btn-outline i { color: var(--gold); }
+        .btn-outline:hover i { color: var(--black); }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        /*=========================
+              Packages Hero
+        =========================*/
+        .packages-hero {
+            position: relative;
+            min-height: 80vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: transparent !important;
+            padding: 80px 0;
+        }
+        .packages-hero .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,.72);
+        }
+        .packages-content {
+            position: relative;
+            z-index: 2;
+            max-width: 850px;
+            width: 100%;
+            margin: auto;
+        }
+        .packages-content .small-title {
+            color: #d4af37;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            margin-bottom: 18px;
+        }
+        .packages-content h1 {
+            color: #fff;
+            font-size: 68px;
+            font-family: 'Playfair Display', serif;
+            line-height: 1.2;
+            margin-bottom: 25px;
+        }
+        .packages-content p {
+            color: #d6d6d6;
+            font-size: 18px;
+            line-height: 1.9;
+            margin-bottom: 40px;
+        }
+
+        /*========================================
+                PACKAGES SECTION
+        ========================================*/
+        .packages-section {
+            padding: 100px 0;
+            background: transparent !important;
+        }
+        .small-title {
+            color: #d4af37;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 15px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        .section-title {
+            color: #fff;
+            font-size: 52px;
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 20px;
+        }
+        .section-text {
+            color: #bdbdbd;
+            max-width: 700px;
+            margin: auto;
+            line-height: 1.9;
+            font-size: 17px;
+        }
+
+        .package-card {
+            position: relative;
+            background: rgba(20, 20, 20, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(212, 175, 55, .25);
+            border-radius: 20px;
+            padding: 45px 35px;
+            text-align: center;
+            height: 100%;
+            transition: .4s;
+            overflow: hidden;
+        }
+        .package-card:hover {
+            transform: translateY(-10px);
+            border-color: #d4af37;
+            box-shadow: 0 15px 35px rgba(212, 175, 55, .25);
+        }
+        .featured {
+            border: 2px solid #d4af37;
+            transform: scale(1.05);
+        }
+        .featured:hover {
+            transform: scale(1.08);
+        }
+        .badge-package {
+            position: absolute;
+            top: 18px;
+            right: -38px;
+            width: 170px;
+            background: #d4af37;
+            color: #000;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 8px 0;
+            transform: rotate(45deg);
+        }
+        .package-card h3 {
+            color: #d4af37;
+            font-family: 'Playfair Display', serif;
+            font-size: 34px;
+            margin-top: 20px;
+            margin-bottom: 25px;
+        }
+        .price {
+            color: #a8a8a8;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+        .price span {
+            display: block;
+            color: #fff;
+            font-size: 38px;
+            font-weight: 700;
+            margin-top: 10px;
+        }
+        .package-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 35px;
+        }
+        .package-card ul li {
+            color: #e5e5e5;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(255,255,255,.08);
+            transition: .3s;
+        }
+        .package-card ul li:last-child { border: none; }
+        .package-card ul li:hover {
+            color: #d4af37;
+            padding-left: 8px;
+        }
+        .package-card .btn-gold {
+            display: inline-block;
+            width: 100%;
+            padding: 15px;
+            background: #d4af37;
+            color: #000;
+            border: 2px solid #d4af37;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            transition: .35s;
+        }
+        .package-card .btn-gold:hover {
+            background: transparent;
+            color: #d4af37;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, .35);
+        }
+
+        /*=========================
+            Comparison Section
+        =========================*/
+        .comparison-section {
+            padding: 100px 0;
+            background: transparent !important;
+        }
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            overflow: hidden;
+            border-radius: 18px;
+        }
+        .comparison-table th {
+            background: #d4af37;
+            color: #000;
+            padding: 18px;
+            font-size: 18px;
+            text-align: center;
+        }
+        .comparison-table td {
+            background: rgba(24,24,24,0.7);
+            backdrop-filter: blur(4px);
+            color: #ddd;
+            padding: 18px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,.08);
+        }
+        .comparison-table td:first-child {
+            text-align: left;
+            color: #fff;
+            font-weight: 600;
+        }
+        .comparison-table tbody tr:hover td {
+            background: rgba(34,34,34,0.8);
+            transition: .3s;
+        }
+
+        /*=====================================
+                WHY CHOOSE US
+        ======================================*/
+        .why-packages {
+            padding: 100px 0;
+            background: transparent !important;
+        }
+        .why-card {
+            background: rgba(20,20,20,0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(212, 175, 55, .20);
+            border-radius: 20px;
+            padding: 45px 30px;
+            text-align: center;
+            height: 100%;
+            transition: .4s;
+        }
+        .why-card:hover {
+            transform: translateY(-10px);
+            border-color: #d4af37;
+            box-shadow: 0 15px 35px rgba(212, 175, 55, .25);
+        }
+        .why-icon {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 25px;
+            border-radius: 50%;
+            background: rgba(212, 175, 55, .10);
+            border: 2px solid rgba(212, 175, 55, .30);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: .4s;
+        }
+        .why-icon i {
+            color: #d4af37;
+            font-size: 36px;
+            transition: .4s;
+        }
+        .why-card:hover .why-icon {
+            background: #d4af37;
+            transform: rotate(8deg);
+        }
+        .why-card:hover .why-icon i {
+            color: #000;
+            transform: scale(1.15);
+        }
+        .why-card h4 {
+            color: #ffffff;
+            font-size: 24px;
+            margin-bottom: 15px;
+            font-family: 'Playfair Display', serif;
+        }
+        .why-card p {
+            color: #c9c9c9;
+            line-height: 1.8;
+            font-size: 15px;
+        }
+
+        /*====================================
+                FAQ SECTION
+        ====================================*/
+        .faq-section {
+            padding: 100px 0;
+            background: transparent !important;
+        }
+        .accordion-item {
+            background: rgba(20,20,20,0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(212, 175, 55, .20);
+            border-radius: 15px !important;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .accordion-button {
+            background: rgba(20,20,20,0.7);
+            color: #fff;
+            font-size: 18px;
+            font-weight: 600;
+            padding: 22px 25px;
+            box-shadow: none;
+        }
+        .accordion-button:not(.collapsed) {
+            background: rgba(27,27,27,0.8);
+            color: #d4af37;
+        }
+        .accordion-button:focus {
+            box-shadow: none;
+            border: none;
+        }
+        .accordion-button::after {
+            filter: invert(1);
+        }
+        .accordion-body {
+            background: rgba(24,24,24,0.7);
+            color: #cfcfcf;
+            line-height: 1.9;
+            padding: 22px 25px;
+        }
+
+        /*====================================
+                PACKAGE CTA
+        ====================================*/
+        .package-cta {
+            padding: 100px 0;
+            background: transparent !important;
+        }
+        .cta-box {
+            max-width: 900px;
+            margin: auto;
+            text-align: center;
+            background: rgba(20,20,20,0.5);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(212, 175, 55, .25);
+            border-radius: 25px;
+            padding: 70px 50px;
+            transition: .4s;
+        }
+        .cta-box:hover {
+            border-color: #d4af37;
+            box-shadow: 0 0 35px rgba(212, 175, 55, .25);
+        }
+        .cta-box h2 {
+            color: #fff;
+            font-size: 48px;
+            font-family: 'Playfair Display', serif;
+            margin: 20px 0;
+        }
+        .cta-box p {
+            color: #cfcfcf;
+            font-size: 17px;
+            line-height: 1.9;
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .btn-gold {
+            display: inline-block;
+            padding: 15px 35px;
+            background: #d4af37;
+            color: #000;
+            border: 2px solid #d4af37;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: .35s;
+        }
+        .btn-gold:hover {
+            background: transparent;
+            color: #d4af37;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, .30);
+        }
+        .btn-outline {
+            display: inline-block;
+            padding: 15px 35px;
+            background: transparent;
+            color: #fff;
+            border: 2px solid #fff;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: .35s;
+        }
+        .btn-outline:hover {
+            background: #d4af37;
+            color: #000;
+            border-color: #d4af37;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, .30);
+        }
+
+        /*=========================
+                Footer
+        =========================*/
+        .about-footer {
+            background: rgba(0,0,0,0.9) !important;
+            padding: 70px 0 25px;
+            border-top: 2px solid #d4af37;
+            backdrop-filter: blur(5px);
+        }
+        .footer-logo {
+            color: #d4af37;
+            font-family: 'Cinzel', serif;
+            font-size: 34px;
+            margin-bottom: 20px;
+        }
+        .footer-text {
+            color: #bdbdbd;
+            line-height: 1.9;
+            max-width: 500px;
+        }
+        .developer-title {
+            color: #d4af37;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+        .developer-name {
+            color: #fff;
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+        .developer-role {
+            color: #bdbdbd;
+        }
+        .about-footer hr {
+            border-color: rgba(212, 175, 55, .25);
+            margin: 40px 0 20px;
+        }
+        .copyright {
+            text-align: center;
+            color: #888;
+            font-size: 15px;
+        }
+
+        @media(max-width:992px){
+            .featured { transform: scale(1); }
+            .featured:hover { transform: translateY(-10px); }
+            .section-title { font-size: 42px; }
+        }
+
+        @media(max-width:768px){
+            header { padding: 12px 20px; grid-template-columns: 1fr auto 1fr; }
+            .nav-links { gap: 10px; }
+            .nav-links a { font-size: 13px; }
+            .nav-actions .btn { padding: 8px 16px; font-size: 12px; }
+            .packages-hero { min-height: 60vh; padding: 60px 0; }
+            .packages-content h1 { font-size: 42px; }
+            .packages-section { padding: 70px 0; }
+            .section-title { font-size: 34px; }
+            .package-card { padding: 35px 25px; margin-bottom: 25px; }
+            .price span { font-size: 30px; }
+            .package-card h3 { font-size: 28px; }
+            .cta-box { padding: 50px 25px; }
+            .cta-box h2 { font-size: 34px; }
+            .cta-buttons { flex-direction: column; align-items: center; }
+            .about-footer { text-align: center; }
+            .footer-text { margin: 0 auto; }
+            .developer-name { font-size: 28px; }
+            .footer-logo { font-size: 28px; }
+        }
+
+        @media(max-width:576px){
+            .packages-content h1 { font-size: 32px; }
+            .packages-content p { font-size: 15px; }
+            .badge-package { font-size: 11px; width: 140px; right: -32px; }
+            .comparison-table th, .comparison-table td { padding: 12px 10px; font-size: 13px; }
+            .accordion-button { font-size: 15px; padding: 16px 18px; }
+            .accordion-body { font-size: 14px; padding: 16px 18px; }
+        }
+    </style>
+</head>
+<body data-page="packages">
+
+<!-- ===== FULL PAGE VIDEO BACKGROUND ===== -->
+<video autoplay muted loop playsinline class="bg-video">
+    <source src="./videos/13430839_1920_1080_60fps.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+<div class="bg-overlay"></div>
+
+<!-- ===== ANNOUNCEMENT BAR ===== -->
+<div class="announcement-bar">
+    <div class="marquee">
+        <i class="fas fa-star"></i> Welcome to Noor e Mehal - Your Dream Wedding Planner 
+        <i class="fas fa-heart"></i> 
+        <i class="fas fa-gem"></i> Book Now & Get 10% Off on Premium Packages
+    </div>
+</div>
+
+<!-- ===== HEADER ===== -->
+<header>
+    <nav class="nav-links">
+        <a href="events.html">Events</a>
+        <a href="packages.html" class="active">Packages</a>
+        <a href="services.html">Services</a>
+        <a href="about_us.html">About</a>
+        <a href="faqs.html">FAQs</a>
+        <a href="contact_us.html">Contact</a>
+    </nav>
+
+    <a href="index.html" class="logo">
+        <h1>Noor e <span>Mehal</span></h1>
+    </a>
+
+    <div class="nav-actions">
+        
+            <a href="login.html" class="btn btn-outline">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </a>
+            <a href="register.html" class="btn btn-primary">
+                <i class="fas fa-user-plus"></i> Register
+            </a>
+        
+    </div>
+
+    <button class="mobile-toggle" onclick="toggleMenu()">
+        <i class="fas fa-bars"></i>
+    </button>
+</header>
+<!-- ===== PACKAGES SECTION ===== -->
+<section class="packages-section" id="packages">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h5 class="small-title">OUR PACKAGES</h5>
+            <h2 class="section-title">Choose Your Perfect Wedding Package</h2>
+            <p class="section-text">Select a package that matches your dream wedding. Every package is carefully designed to provide elegance, luxury and unforgettable memories.</p>
+        </div>
+
+        <div class="row g-4">
+            <!-- Silver -->
+            <div class="col-lg-4">
+                <div class="package-card">
+                    <h3>Silver</h3>
+                    <div class="price">Starting From <span>PKR 500,000+</span></div>
+                    <ul>
+                        <li>✔ Wedding Planning</li>
+                        <li>✔ Basic Decoration</li>
+                        <li>✔ Photography</li>
+                        <li>✔ Catering</li>
+                        <li>✔ Up To 200 Guests</li>
+                    </ul>
+                    <a href="contact_us.html" class="btn-gold">Book Silver</a>
+                </div>
+            </div>
+
+            <!-- Gold -->
+            <div class="col-lg-4">
+                <div class="package-card featured">
+                    <div class="badge-package">MOST POPULAR</div>
+                    <h3>Gold</h3>
+                    <div class="price">Starting From <span>PKR 1,000,000+</span></div>
+                    <ul>
+                        <li>✔ Everything in Silver</li>
+                        <li>✔ Premium Decoration</li>
+                        <li>✔ Cinematic Video</li>
+                        <li>✔ Bridal Entry</li>
+                        <li>✔ Up To 500 Guests</li>
+                    </ul>
+                    <a href="contact_us.html" class="btn-gold">Book Golden</a>
+                </div>
+            </div>
+
+            <!-- Royal -->
+            <div class="col-lg-4">
+                <div class="package-card">
+                    <h3>Royal</h3>
+                    <div class="price">Custom Quote <span>Luxury Wedding</span></div>
+                    <ul>
+                        <li>✔ Everything in Gold</li>
+                        <li>✔ Luxury Stage</li>
+                        <li>✔ Drone Shoot</li>
+                        <li>✔ Live Band</li>
+                        <li>✔ Unlimited Guests</li>
+                    </ul>
+                    <a href="contact_us.html" class="btn-gold">Book Royal</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== COMPARISON ===== -->
+<section class="comparison-section">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h5 class="small-title">COMPARE PACKAGES</h5>
+            <h2 class="section-title">Package Comparison</h2>
+            <p class="section-text">Compare our wedding packages and choose the one that perfectly matches your dream celebration.</p>
+        </div>
+        <div class="table-responsive">
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Features</th>
+                        <th>Silver</th>
+                        <th>Gold</th>
+                        <th>Royal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Wedding Planning</td><td>✔</td><td>✔</td><td>✔</td></tr>
+                    <tr><td>Decoration</td><td>Basic</td><td>Premium</td><td>Luxury</td></tr>
+                    <tr><td>Photography</td><td>✔</td><td>✔</td><td>✔</td></tr>
+                    <tr><td>Drone Shoot</td><td>✖</td><td>✔</td><td>✔</td></tr>
+                    <tr><td>Live Band</td><td>✖</td><td>Optional</td><td>✔</td></tr>
+                    <tr><td>Royal Entry</td><td>✖</td><td>✔</td><td>✔</td></tr>
+                    <tr><td>Fireworks</td><td>✖</td><td>✖</td><td>✔</td></tr>
+                    <tr><td>Guest Capacity</td><td>200</td><td>500</td><td>Unlimited</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- ===== WHY CHOOSE US ===== -->
+<section class="why-packages">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h5 class="small-title">WHY CHOOSE US</h5>
+            <h2 class="section-title">Why Couples Trust Noor-E-Mahal</h2>
+            <p class="section-text">We don't just organize weddings—we create unforgettable experiences filled with elegance, luxury, and lifelong memories.</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="why-card">
+                    <div class="why-icon"><i class="fa-regular fa-calendar-check"></i></div>
+                    <h4>Expert Planning</h4>
+                    <p>Every wedding is carefully planned by our experienced coordinators to ensure a smooth and stress-free event.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="why-card">
+                    <div class="why-icon"><i class="fa-solid fa-gem"></i></div>
+                    <h4>Luxury Decoration</h4>
+                    <p>Elegant floral arrangements, premium stage décor and luxury themes designed to impress every guest.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="why-card">
+                    <div class="why-icon"><i class="fa-solid fa-utensils"></i></div>
+                    <h4>Premium Catering</h4>
+                    <p>Delicious menus prepared by professional chefs with exceptional presentation and outstanding taste.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="why-card">
+                    <div class="why-icon"><i class="fa-solid fa-award"></i></div>
+                    <h4>100% Satisfaction</h4>
+                    <p>Our mission is to turn your dream wedding into reality with exceptional quality and personalized service.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="faq-section">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h5 class="small-title">FREQUENTLY ASKED QUESTIONS</h5>
+            <h2 class="section-title">Have Questions?</h2>
+            <p class="section-text">Find answers to the most common questions about our wedding packages and services.</p>
+        </div>
+        <div class="accordion" id="faqAccordion">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                        Can I customize my wedding package?
+                    </button>
+                </h2>
+                <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">Yes. Every package can be customized according to your budget, guest count and personal preferences.</div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                        Do you arrange destination weddings?
+                    </button>
+                </h2>
+                <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">Yes. We also organize destination weddings across Pakistan with complete event management.</div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                        Can I increase the guest capacity later?
+                    </button>
+                </h2>
+                <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">Absolutely. Guest capacity can be adjusted before the final booking confirmation.</div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                        How do I book a package?
+                    </button>
+                </h2>
+                <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">Simply click the "Choose Package" button and submit your inquiry through our contact form. Our team will contact you shortly.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="package-cta">
+    <div class="container">
+        <div class="cta-box">
+            <h5 class="small-title">LET'S START PLANNING</h5>
+            <h2>Your Dream Wedding Begins Here</h2>
+            <p>Every love story is unique, and your wedding should be too. Contact Noor-E-Mahal today and let our experts create an unforgettable celebration tailored just for you.</p>
+            <div class="cta-buttons">
+                <a href="contact_us.html" class="btn-gold">Request a Quote</a>
+                <a href="contact_us.html" class="btn-outline">Contact Us</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="about-footer">
+    <div class="container">
+        <div class="row align-items-center gy-4">
+            <div class="col-lg-6">
+                <h2 class="footer-logo">Noor-E-Mahal</h2>
+                <p class="footer-text">Noor-E-Mahal is dedicated to creating unforgettable wedding experiences through luxury planning, elegant decoration and exceptional service.</p>
+            </div>
+            <div class="col-lg-6 text-lg-end">
+                <h5 class="developer-title">Developed By</h5>
+                <h3 class="developer-name">INSHAL AKBER</h3>
+                <p class="developer-role">Full Stack Web Developer</p>
+            </div>
+        </div>
+        <hr>
+        <div class="copyright">© 2026 Noor-E-Mahal | All Rights Reserved.</div>
+    </div>
+</footer>
+
+<script>
+    function toggleMenu() {
+        document.getElementById('mainNav').classList.toggle('open');
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
+
+
+

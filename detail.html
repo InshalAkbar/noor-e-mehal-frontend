@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Planning | Noor-E-Mahal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Playfair+Display:wght@600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <style>
+        /* =========================================
+           BASE STYLES
+        ========================================= */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --gold: #d4af37;
+            --gold-light: #f0d77b;
+            --gold-dark: #a88920;
+            --black: #0a0a0a;
+            --black-light: #111111;
+            --card: #151515;
+            --white: #ffffff;
+            --gray: #999999;
+            --border: rgba(212, 175, 55, 0.22);
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+        }
+        a { text-decoration: none; }
+
+        /* ===== FULL PAGE BACKGROUND ===== */
+        body {
+            background-image: url('images/wedplaning.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            z-index: -1;
+        }
+
+        /* ===== NAVBAR ===== */
+        header {
+            background: rgba(10, 10, 10, 0.85) !important;
+            padding: 15px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid rgba(255, 215, 0, 0.15);
+            backdrop-filter: blur(10px);
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 0 0 auto;
+            text-decoration: none;
+        }
+        .logo h1 {
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--white);
+            letter-spacing: -0.5px;
+            font-family: 'Cinzel', serif;
+        }
+        .logo h1 span { color: var(--gold); }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex: 1;
+        }
+        .nav-links a {
+            color: var(--gray);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            transition: all 0.3s;
+            position: relative;
+        }
+        .nav-links a:hover,
+        .nav-links a.active { color: var(--gold); }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s;
+        }
+        .nav-links a:hover::after,
+        .nav-links a.active::after { width: 100%; }
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 15px;
+            flex: 1;
+        }
+        .nav-actions .btn {
+            padding: 10px 24px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-primary {
+            background: var(--gold);
+            color: var(--black);
+        }
+        .btn-primary:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.3);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--gold);
+        }
+        .btn-outline:hover {
+            background: var(--gold);
+            color: var(--black);
+        }
+        .btn-outline i { color: var(--gold); }
+        .btn-outline:hover i { color: var(--black); }
+
+        /* =========================================
+           HERO / BANNER
+        ========================================= */
+        .service-hero {
+            min-height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 80px 20px;
+            background: transparent !important;
+        }
+        .service-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            padding: 40px 20px;
+        }
+        .service-hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(42px, 6vw, 72px);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 15px;
+            color: #fff;
+            text-shadow: 0 4px 40px rgba(0,0,0,0.8);
+            letter-spacing: 2px;
+        }
+        .service-hero-content p {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: clamp(18px, 2vw, 24px);
+            max-width: 700px;
+            margin: auto;
+            line-height: 1.8;
+            text-shadow: 0 2px 30px rgba(0,0,0,0.8);
+            font-weight: 300;
+        }
+        .back-link {
+            margin-top: 20px;
+        }
+        .back-link a {
+            color: var(--gold);
+            font-size: 14px;
+            transition: 0.3s;
+        }
+        .back-link a:hover { color: #fff; }
+        .back-link a i { margin-right: 8px; }
+
+        /* =========================================
+           PRODUCTS SECTION
+        ========================================= */
+        .products-section {
+            padding: 60px 8% 100px;
+            background: transparent !important;
+        }
+        .section-heading {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .section-heading .section-label {
+            color: var(--gold);
+            font-size: 13px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        .section-heading h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            color: #fff;
+            margin: 10px 0;
+        }
+        .section-heading h2 span { color: var(--gold); }
+        .section-heading p {
+            color: #ccc;
+            font-size: 16px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* =========================================
+           PRODUCTS GRID
+        ========================================= */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        /* =========================================
+           PRODUCT CARD
+        ========================================= */
+        .product-card {
+            position: relative;
+            background: rgba(20, 20, 20, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+        .product-card:hover {
+            transform: translateY(-15px);
+            border-color: var(--gold);
+            box-shadow: 0 30px 80px rgba(212, 175, 55, 0.15), 0 0 40px rgba(212, 175, 55, 0.05);
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 22px;
+            background: linear-gradient(45deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: -1;
+        }
+        .product-card:hover::before {
+            opacity: 1;
+        }
+
+        /* ===== PRODUCT IMAGE ===== */
+        .product-image {
+            position: relative;
+            width: 100%;
+            height: 240px;
+            overflow: hidden;
+            background: #111;
+        }
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* ===== BADGE ===== */
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--gold);
+            color: #000;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        /* ===== RATING & WISHLIST ===== */
+        .product-rating {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .product-rating .stars {
+            color: var(--gold);
+            font-size: 13px;
+        }
+        .product-rating .rating-num {
+            color: #fff;
+            font-size: 13px;
+            font-weight: 600;
+            background: rgba(0,0,0,0.5);
+            padding: 2px 10px;
+            border-radius: 12px;
+        }
+        .wishlist-btn {
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: #fff;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: 0.3s;
+            backdrop-filter: blur(5px);
+        }
+        .wishlist-btn:hover {
+            background: var(--gold);
+            color: #000;
+            transform: scale(1.1);
+        }
+
+        /* ===== PRODUCT CONTENT ===== */
+        .product-content {
+            padding: 20px 25px 25px;
+        }
+        .product-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            color: #fff;
+            margin-bottom: 6px;
+        }
+        .product-content .product-desc {
+            color: #aaa;
+            font-size: 13px;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        /* ===== FEATURES ===== */
+        .product-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 15px;
+        }
+        .product-features span {
+            background: rgba(212, 175, 55, 0.08);
+            border: 1px solid rgba(212, 175, 55, 0.12);
+            color: #ddd;
+            font-size: 11px;
+            padding: 3px 12px;
+            border-radius: 12px;
+            font-weight: 400;
+            letter-spacing: 0.3px;
+        }
+
+        /* =========================================
+           PRICE - HIDDEN (HATA DIYA)
+        ========================================= */
+        .product-price {
+            display: none;
+        }
+
+        /* =========================================
+           BUTTON - ONLY DETAILS (FULL WIDTH, BIGGER)
+        ========================================= */
+        .product-buttons {
+            display: flex;
+            gap: 0;
+            margin-top: 5px;
+        }
+        .btn-details {
+            width: 100%;
+            padding: 18px 20px;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(212, 175, 55, 0.05));
+            border: 1.5px solid rgba(212, 175, 55, 0.4);
+            color: var(--gold);
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            letter-spacing: 0.5px;
+        }
+        .btn-details:hover {
+            background: var(--gold);
+            color: #000;
+            border-color: var(--gold);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(212, 175, 55, 0.4);
+        }
+        .btn-details i {
+            font-size: 18px;
+            transition: transform 0.3s ease;
+        }
+        .btn-details:hover i {
+            transform: translateX(8px);
+        }
+
+        /* =========================================
+           FOOTER
+        ========================================= */
+        .main-footer {
+            background: rgba(8, 8, 8, 0.9) !important;
+            padding: 60px 0 0;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            backdrop-filter: blur(5px);
+        }
+        .footer-top {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1.3fr 1.3fr;
+            gap: 40px;
+            padding-bottom: 50px;
+        }
+        .footer-brand h2 {
+            color: var(--gold);
+            font-family: 'Playfair Display', serif;
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+        .footer-brand p {
+            color: #999;
+            font-size: 14px;
+            line-height: 1.8;
+            max-width: 300px;
+        }
+        .footer-social {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            border-radius: 50%;
+            color: var(--gold);
+            text-decoration: none;
+            transition: 0.35s ease;
+        }
+        .footer-social a:hover {
+            background: var(--gold);
+            color: #000;
+            transform: translateY(-5px);
+        }
+        .footer-links h3,
+        .footer-contact h3 {
+            color: #fff;
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .footer-links a {
+            color: #999;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s ease;
+        }
+        .footer-links a:hover {
+            color: var(--gold);
+            padding-left: 6px;
+        }
+        .footer-contact p {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            color: #999;
+            font-size: 14px;
+            line-height: 1.7;
+            margin-bottom: 14px;
+        }
+        .footer-contact p i {
+            color: var(--gold);
+            margin-top: 4px;
+        }
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            padding: 20px 0;
+            border-top: 1px solid rgba(255,255,255,0.04);
+        }
+        .footer-bottom p {
+            color: #666;
+            font-size: 12px;
+            margin: 0;
+        }
+        .footer-bottom span {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+        @media (max-width: 1024px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 768px) {
+            header { padding: 12px 20px; flex-wrap: wrap; }
+            .nav-links { order: 3; flex: 0 0 100%; justify-content: center; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
+            .nav-links a { font-size: 13px; }
+            .nav-actions .btn { padding: 8px 16px; font-size: 12px; }
+            .service-hero { min-height: 40vh; padding: 60px 20px; }
+            .service-hero-content h1 { font-size: 32px; }
+            .products-grid { grid-template-columns: 1fr; max-width: 450px; margin: 0 auto; }
+            .section-heading h2 { font-size: 30px; }
+            .products-section { padding: 40px 5% 60px; }
+            .product-image { height: 180px; }
+            .footer-top { grid-template-columns: 1fr; gap: 30px; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .btn-details { padding: 16px 20px; font-size: 15px; }
+        }
+    </style>
+</head>
+<body data-page="detail">
+
+<!-- ===== HEADER ===== -->
+<header>
+    <nav class="nav-links">
+        <a href="events.html">Events</a>
+        <a href="packages.html">Packages</a>
+        <a href="services.html">Services</a>
+        <a href="about_us.html">About</a>
+        <a href="faqs.html">FAQs</a>
+        <a href="contact_us.html">Contact</a>
+    </nav>
+
+    <a href="index.html" class="logo">
+        <h1>Noor e <span>Mehal</span></h1>
+    </a>
+
+    <div class="nav-actions">
+        
+            <a href="login.html" class="btn btn-outline"><i class="fas fa-sign-in-alt"></i> Login</a>
+            <a href="register.html" class="btn btn-primary"><i class="fas fa-user-plus"></i> Register</a>
+        
+    </div>
+</header>
+
+<!-- ===== SERVICE HERO / BANNER ===== -->
+<section class="service-hero">
+    <div class="service-hero-content">
+        <h1 id="serviceTitle">Wedding Planning</h1>
+        <p id="serviceSubtitle">From Dream to Reality — Every Detail Perfected</p>
+        <div class="back-link">
+            <a href="services.html"><i class="fas fa-arrow-left"></i> Back to All Services</a>
+        </div>
+    </div>
+</section>
+
+<!-- ===== PRODUCTS SECTION ===== -->
+<section class="products-section">
+    <div class="section-heading">
+        <span class="section-label">Our Premium Packages</span>
+        <h2>Choose Your <span>Perfect Experience</span></h2>
+        <p>Select from our luxury wedding packages designed to make your special day unforgettable.</p>
+    </div>
+
+    <div class="products-grid" id="productsGrid"></div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="main-footer">
+    <div class="container">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <h2>Noor-E-Mahal</h2>
+                <p>Creating beautiful weddings, unforgettable moments and celebrations that stay in your heart forever.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <a href="index.html">Home</a>
+                <a href="about_us.html">About Us</a>
+                <a href="services.html">Services</a>
+                <a href="index.html#gallery">Gallery</a>
+                <a href="contact_us.html">Contact</a>
+            </div>
+
+            <div class="footer-links">
+                <h3>Our Services</h3>
+                <a href="detail.html?id=1">Wedding Planning</a>
+                <a href="detail.html?id=2">Décor & Styling</a>
+                <a href="detail.html?id=3">Photography & Films</a>
+                <a href="detail.html?id=4">Catering & Cuisine</a>
+                <a href="detail.html?id=5">Entertainment</a>
+            </div>
+
+            <div class="footer-contact">
+                <h3>Get In Touch</h3>
+                <p><i class="fas fa-location-dot"></i> Karachi, Pakistan</p>
+                <p><i class="fas fa-phone"></i> +92 300 1234567</p>
+                <p><i class="fas fa-envelope"></i> info@nooremahal.com</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© <span class="js-year">2026</span> Noor-E-Mahal. All Rights Reserved.</p>
+            <p>Developed by <span>INSHAL AKBER</span></p>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/main.js"></script>
+<script src="js/data.js"></script>
+<script src="js/pages.js"></script>
+</body>
+</html>
+
+
+

@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #FFD700;
+            --primary-dark: #e6c200;
+            --black: #0a0a0a;
+            --black-light: #1a1a1a;
+            --gray: #888;
+            --light-gray: #2a2a2a;
+            --white: #ffffff;
+            --gold: #d4af37;
+            --gold-light: #f0d77b;
+            --border: rgba(212, 175, 55, 0.22);
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* ===== FULL PAGE VIDEO BACKGROUND ===== */
+        .bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+        }
+
+        .bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            z-index: -1;
+        }
+
+        /* ===== ALL SECTIONS TRANSPARENT ===== */
+        .announcement-bar,
+        header,
+        .services-hero,
+        .main-services,
+        .why-choose-section,
+        .process-section,
+        .packages-section,
+        .services-cta,
+        .main-footer {
+            background: transparent !important;
+            backdrop-filter: blur(2px);
+        }
+
+        .announcement-bar {
+            background: rgba(212, 175, 55, 0.9) !important;
+            color: var(--black);
+            padding: 10px 0;
+            text-align: center;
+            font-weight: 600;
+            font-size: 14px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1001;
+        }
+        .announcement-bar .marquee {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 25s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .announcement-bar i { margin: 0 10px; }
+        .announcement-bar .badge-count {
+            background: var(--black);
+            color: var(--primary);
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+        .announcement-bar .approved-count {
+            background: var(--black);
+            color: var(--primary);
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+
+        /* ================= HEADER ================= */
+        header {
+            background: rgba(10, 10, 10, 0.85) !important;
+            padding: 15px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid rgba(255, 215, 0, 0.15);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 0 0 auto;
+            text-decoration: none;
+        }
+        .logo h1 {
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--white);
+            letter-spacing: -0.5px;
+            font-family: 'Cinzel', serif;
+        }
+        .logo h1 span { color: var(--gold); }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex: 1;
+        }
+        .nav-links a {
+            color: var(--gray);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            transition: all 0.3s;
+            position: relative;
+        }
+        .nav-links a:hover,
+        .nav-links a.active { color: var(--gold); }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s;
+        }
+        .nav-links a:hover::after,
+        .nav-links a.active::after { width: 100%; }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 15px;
+            flex: 1;
+        }
+        .nav-actions .btn {
+            padding: 10px 24px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-primary {
+            background: var(--gold);
+            color: var(--black);
+        }
+        .btn-primary:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.3);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--gold);
+        }
+        .btn-outline:hover {
+            background: var(--gold);
+            color: var(--black);
+        }
+        .btn-outline i { color: var(--gold); }
+        .btn-outline:hover i { color: var(--black); }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        /*=========================================
+                    SERVICES HERO
+        =========================================*/
+        .services-hero {
+            min-height: 70vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: transparent !important;
+            padding: 80px 20px;
+        }
+
+        .services-hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,.70);
+        }
+
+        .services-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 40px 20px;
+        }
+
+        .services-hero-content h5 {
+            color: #d4af37;
+            letter-spacing: 5px;
+            font-size: 15px;
+            margin-bottom: 20px;
+        }
+
+        .services-hero-content h1 {
+            color: #fff;
+            font-family: 'Playfair Display', serif;
+            font-size: 60px;
+            line-height: 1.2;
+            margin-bottom: 25px;
+        }
+
+        .services-hero-content p {
+            color: #ddd;
+            font-size: 18px;
+            line-height: 1.8;
+            max-width: 650px;
+            margin: auto;
+        }
+
+        /*=========================================
+                MAIN SERVICES
+        =========================================*/
+        .main-services {
+            padding: 110px 0;
+            background: transparent !important;
+        }
+
+        .services-heading {
+            text-align: center;
+            max-width: 750px;
+            margin: 0 auto 55px;
+        }
+
+        .services-heading .small-title {
+            color: #d4af37;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 4px;
+            margin-bottom: 15px;
+        }
+
+        .services-heading .section-title {
+            color: #fff;
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 18px;
+        }
+
+        .services-heading .section-text {
+            color: #aaa;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            line-height: 1.8;
+            margin: 0 auto;
+        }
+
+        .main-services .row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin: 0;
+        }
+        .main-services .row > div { width: 100%; }
+
+        .service-card {
+            width: 100%;
+            height: 360px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            border: 1px solid rgba(212,175,55,.25);
+            background: rgba(17,17,17,0.6);
+            backdrop-filter: blur(4px);
+            transition: .4s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: #d4af37;
+            box-shadow: 0 20px 45px rgba(212,175,55,.20);
+        }
+
+        .service-image {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: .6s ease;
+        }
+        .service-card:hover .service-image img { transform: scale(1.1); }
+
+        .service-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,.95), rgba(0,0,0,.15));
+            transition: .5s ease;
+        }
+        .service-card:hover .service-overlay {
+            background: linear-gradient(to top, rgba(0,0,0,.95), rgba(0,0,0,.45));
+        }
+
+        .service-icon {
+            position: absolute;
+            top: 25px;
+            left: 25px;
+            width: 58px;
+            height: 58px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #d4af37;
+            color: #000;
+            font-size: 22px;
+            z-index: 3;
+            transition: .4s ease;
+        }
+        .service-card:hover .service-icon { transform: scale(1.1) rotate(10deg); }
+
+        .service-content {
+            position: absolute;
+            left: 25px;
+            right: 25px;
+            bottom: 25px;
+            z-index: 3;
+        }
+        .service-content h3 {
+            color: #fff;
+            font-family: 'Playfair Display', serif;
+            font-size: 27px;
+            margin-bottom: 12px;
+        }
+        .service-content p {
+            color: #ddd;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            line-height: 1.7;
+            margin-bottom: 18px;
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transform: translateY(20px);
+            transition: .4s ease;
+        }
+        .service-card:hover .service-content p {
+            opacity: 1;
+            max-height: 100px;
+            transform: translateY(0);
+        }
+
+        .service-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border: 1px solid #d4af37;
+            border-radius: 30px;
+            color: #d4af37;
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: .4s ease;
+        }
+        .service-card:hover .service-btn {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .service-btn:hover {
+            background: #d4af37;
+            color: #000;
+        }
+        .service-btn i { transition: .3s ease; }
+        .service-btn:hover i { transform: translateX(5px); }
+
+        /*=========================================
+                WHY CHOOSE SECTION
+        =========================================*/
+        .why-choose-section {
+            width: 100%;
+            padding: 110px 0;
+            overflow: hidden;
+            background: transparent !important;
+        }
+
+        .why-main-layout {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 40% 60%;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .why-content h2 {
+            color: #fff;
+            font-family: 'Playfair Display',serif;
+            font-size: 48px;
+            line-height: 1.2;
+        }
+        .why-content h2 span { color: #d4af37; }
+
+        .why-features {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+            gap: 20px;
+        }
+
+        .why-feature {
+            width: 100%;
+            min-height: 220px;
+            display: flex;
+            align-items: flex-start;
+            gap: 18px;
+            padding: 28px 22px;
+            background: rgba(24,24,24,0.6);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(212,175,55,.20);
+            border-radius: 16px;
+        }
+        .why-feature:hover {
+            transform: translateY(-6px);
+            border-color: #d4af37;
+        }
+
+        .why-icon {
+            flex-shrink: 0;
+            width: 55px;
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(212,175,55,.12);
+            color: #d4af37;
+            font-size: 21px;
+        }
+        .why-feature:hover .why-icon {
+            background: #d4af37;
+            color: #000;
+        }
+
+        .why-feature h4 {
+            color: #fff;
+            font-family: 'Playfair Display',serif;
+            font-size: 20px;
+            line-height: 1.3;
+            margin-bottom: 8px;
+        }
+        .why-feature p {
+            color: #999;
+            font-family: 'Poppins',sans-serif;
+            font-size: 13px;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        /*=========================================
+                OUR PROCESS
+        =========================================*/
+        .process-section {
+            padding: 110px 0;
+            background: transparent !important;
+        }
+        .process-heading {
+            text-align: center;
+            max-width: 750px;
+            margin: 0 auto 65px;
+        }
+        .process-heading .small-title {
+            color: #d4af37;
+            font-family: 'Poppins',sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 4px;
+            margin-bottom: 15px;
+        }
+        .process-heading .section-title {
+            color: #fff;
+            font-family: 'Playfair Display',serif;
+            font-size: 48px;
+            margin-bottom: 18px;
+        }
+        .process-heading .section-text {
+            color: #999;
+            font-family: 'Poppins',sans-serif;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .process-wrapper {
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            gap: 25px;
+            position: relative;
+        }
+        .process-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 12%;
+            right: 12%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, #d4af37, transparent);
+            opacity: .35;
+        }
+
+        .process-step {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 20px;
+        }
+        .process-number {
+            color: #d4af37;
+            font-family: 'Poppins',sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+        .process-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(24,24,24,0.6);
+            border: 1px solid rgba(212,175,55,.35);
+            color: #d4af37;
+            font-size: 26px;
+            transition: .4s ease;
+            backdrop-filter: blur(4px);
+        }
+        .process-step:hover .process-icon {
+            background: #d4af37;
+            color: #000;
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(212,175,55,.20);
+        }
+        .process-step h3 {
+            color: #fff;
+            font-family: 'Playfair Display',serif;
+            font-size: 23px;
+            margin-bottom: 12px;
+        }
+        .process-step p {
+            color: #999;
+            font-family: 'Poppins',sans-serif;
+            font-size: 13px;
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        /*=========================================
+                WEDDING PACKAGES - USD PRICES
+        =========================================*/
+        .packages-section {
+            padding: 110px 0;
+            background: transparent !important;
+        }
+        .packages-heading {
+            text-align: center;
+            max-width: 750px;
+            margin: 0 auto 60px;
+        }
+        .packages-heading .small-title {
+            color: #d4af37;
+            font-family: 'Poppins',sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 4px;
+            margin-bottom: 15px;
+        }
+        .packages-heading .section-title {
+            color: #fff;
+            font-family: 'Playfair Display',serif;
+            font-size: 48px;
+            margin-bottom: 18px;
+        }
+        .packages-heading .section-text {
+            color: #999;
+            font-family: 'Poppins',sans-serif;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .packages-wrapper {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 25px;
+            align-items: stretch;
+        }
+
+        .package-card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 40px 30px;
+            background: rgba(24,24,24,0.6);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(212,175,55,.20);
+            border-radius: 20px;
+            transition: .4s ease;
+        }
+        .package-card:hover {
+            transform: translateY(-10px);
+            border-color: #d4af37;
+            box-shadow: 0 20px 40px rgba(212,175,55,.15);
+        }
+
+        .featured-package {
+            border: 1px solid #d4af37;
+            transform: translateY(-12px);
+        }
+        .featured-package:hover { transform: translateY(-20px); }
+
+        .popular-badge {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            padding: 8px 18px;
+            background: #d4af37;
+            color: #000;
+            border-radius: 20px;
+            font-family: 'Poppins',sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            white-space: nowrap;
+        }
+
+        .package-top { text-align: center; }
+        .package-top h3 {
+            color: #fff;
+            font-family: 'Playfair Display',serif;
+            font-size: 27px;
+            margin-bottom: 12px;
+        }
+        .package-top p {
+            color: #999;
+            font-family: 'Poppins',sans-serif;
+            font-size: 13px;
+            line-height: 1.7;
+            min-height: 45px;
+        }
+
+        .package-price {
+            text-align: center;
+            padding: 25px 0;
+            border-top: 1px solid rgba(212,175,55,.15);
+            border-bottom: 1px solid rgba(212,175,55,.15);
+            margin: 25px 0;
+        }
+        .package-price span {
+            display: block;
+            color: #888;
+            font-family: 'Poppins',sans-serif;
+            font-size: 12px;
+            margin-bottom: 8px;
+        }
+        .package-price h4 {
+            color: #d4af37;
+            font-family: 'Playfair Display',serif;
+            font-size: 28px;
+            margin: 0;
+        }
+        .package-price small {
+            color: #666;
+            font-size: 11px;
+            display: block;
+            margin-top: 4px;
+        }
+
+        .package-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 30px;
+        }
+        .package-card ul li {
+            color: #bbb;
+            font-family: 'Poppins',sans-serif;
+            font-size: 13px;
+            margin-bottom: 16px;
+        }
+        .package-card ul li i {
+            color: #d4af37;
+            margin-right: 10px;
+        }
+
+        .package-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: auto;
+            padding: 13px 20px;
+            border: 1px solid #d4af37;
+            border-radius: 30px;
+            color: #d4af37;
+            text-decoration: none;
+            font-family: 'Poppins',sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            transition: .35s ease;
+        }
+        .package-btn:hover {
+            background: #d4af37;
+            color: #000;
+        }
+        .package-btn i { transition: .3s ease; }
+        .package-btn:hover i { transform: translateX(5px); }
+
+        /*=========================================
+                SERVICES CTA
+        =========================================*/
+        .services-cta {
+            position: relative;
+            min-height: 480px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+            background: transparent !important;
+            padding: 80px 20px;
+        }
+
+        .services-cta-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(rgba(0,0,0,.82), rgba(0,0,0,.88));
+        }
+
+        .services-cta-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: auto;
+            padding: 40px 20px;
+        }
+        .services-cta-content .small-title {
+            color: #d4af37;
+            font-family: 'Poppins',sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 4px;
+            margin-bottom: 20px;
+        }
+        .services-cta-content h2 {
+            color: #fff;
+            font-family: 'Playfair Display',serif;
+            font-size: 52px;
+            line-height: 1.25;
+            margin-bottom: 22px;
+        }
+        .services-cta-content h2 span { color: #d4af37; }
+        .services-cta-content p {
+            color: #bbb;
+            font-family: 'Poppins',sans-serif;
+            font-size: 16px;
+            line-height: 1.8;
+            max-width: 650px;
+            margin: 0 auto 32px;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px 30px;
+            background: #d4af37;
+            color: #000;
+            border-radius: 30px;
+            text-decoration: none;
+            font-family: 'Poppins',sans-serif;
+            font-weight: 600;
+            transition: .35s ease;
+        }
+        .cta-btn:hover {
+            background: #fff;
+            color: #000;
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(212,175,55,.25);
+        }
+        .cta-btn i { transition: .3s ease; }
+        .cta-btn:hover i { transform: translateX(6px); }
+
+        /*=========================================
+                MAIN FOOTER
+        =========================================*/
+        .main-footer {
+            background: rgba(8,8,8,0.9) !important;
+            padding: 80px 0 0;
+            border-top: 1px solid rgba(212,175,55,.20);
+            backdrop-filter: blur(5px);
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1.3fr 1.3fr;
+            gap: 50px;
+            padding-bottom: 60px;
+        }
+
+        .footer-brand h2 {
+            color: #d4af37;
+            font-family: 'Playfair Display',serif;
+            font-size: 32px;
+            margin-bottom: 18px;
+        }
+        .footer-brand p {
+            color: #999;
+            font-family: 'Poppins',sans-serif;
+            font-size: 14px;
+            line-height: 1.8;
+            max-width: 300px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 12px;
+            margin-top: 25px;
+        }
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(212,175,55,.35);
+            border-radius: 50%;
+            color: #d4af37;
+            text-decoration: none;
+            transition: .35s ease;
+        }
+        .footer-social a:hover {
+            background: #d4af37;
+            color: #000;
+            transform: translateY(-5px);
+        }
+
+        .footer-links h3,
+        .footer-contact h3 {
+            color: #fff;
+            font-family: 'Playfair Display',serif;
+            font-size: 21px;
+            margin-bottom: 22px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .footer-links a {
+            color: #999;
+            text-decoration: none;
+            font-family: 'Poppins',sans-serif;
+            font-size: 14px;
+            transition: .3s ease;
+        }
+        .footer-links a:hover {
+            color: #d4af37;
+            padding-left: 6px;
+        }
+
+        .footer-contact p {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            color: #999;
+            font-family: 'Poppins',sans-serif;
+            font-size: 14px;
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+        .footer-contact p i {
+            color: #d4af37;
+            margin-top: 4px;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            padding: 22px 0;
+            border-top: 1px solid rgba(255,255,255,.08);
+        }
+        .footer-bottom p {
+            color: #777;
+            font-family: 'Poppins',sans-serif;
+            font-size: 12px;
+            margin: 0;
+        }
+        .footer-bottom span {
+            color: #d4af37;
+            font-weight: 600;
+        }
+
+        .why-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 26px;
+            border: 1px solid #d4af37;
+            border-radius: 30px;
+            background: transparent;
+            color: #d4af37;
+            text-decoration: none;
+            font-family: 'Poppins',sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            transition: all .35s ease;
+        }
+        .why-btn i { font-size: 16px; transition: transform .35s ease; }
+        .why-btn:hover {
+            background: #d4af37;
+            color: #000;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(212,175,55,.25);
+        }
+        .why-btn:hover i { transform: translateX(5px); }
+
+        @media(max-width:992px){
+            .main-services .row { grid-template-columns: repeat(2, 1fr); }
+            .services-heading .section-title { font-size: 42px; }
+            .why-main-layout { grid-template-columns: 1fr; }
+            .why-content { text-align: center; padding-right: 0; margin-bottom: 40px; }
+            .packages-wrapper { grid-template-columns: repeat(2,1fr); }
+            .featured-package { transform: none; }
+            .featured-package:hover { transform: translateY(-10px); }
+            .footer-top { grid-template-columns: repeat(2,1fr); gap: 40px; }
+            .process-wrapper { grid-template-columns: repeat(2,1fr); row-gap: 45px; }
+            .process-wrapper::before { display: none; }
+            .process-heading .section-title { font-size: 42px; }
+        }
+
+        @media(max-width:768px){
+            header { padding: 12px 20px; flex-wrap: wrap; }
+            .nav-links { order: 3; flex: 0 0 100%; justify-content: center; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
+            .nav-links a { font-size: 13px; }
+            .nav-actions .btn { padding: 8px 16px; font-size: 12px; }
+            .services-hero-content h1 { font-size: 40px; }
+            .services-hero-content p { font-size: 15px; }
+            .main-services { padding: 80px 15px; }
+            .services-heading .section-title { font-size: 36px; }
+            .services-heading .section-text { font-size: 14px; }
+            .service-card { height: 350px; }
+            .why-features { grid-template-columns: 1fr; }
+            .packages-section { padding: 80px 15px; }
+            .packages-wrapper { grid-template-columns: 1fr; }
+            .packages-heading .section-title { font-size: 36px; }
+            .services-cta-content h2 { font-size: 40px; }
+            .services-cta-content p { font-size: 14px; }
+            .footer-top { grid-template-columns: 1fr; gap: 35px; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .main-footer { padding: 60px 20px 0; }
+            .process-section { padding: 80px 15px; }
+            .process-wrapper { grid-template-columns: 1fr; }
+            .process-heading .section-title { font-size: 36px; }
+            .why-choose-section { padding: 80px 15px; }
+        }
+
+        @media(max-width:576px){
+            .services-hero { min-height: 60vh; }
+            .services-hero-content h1 { font-size: 36px; }
+            .main-services .row { grid-template-columns: 1fr; }
+            .services-cta { min-height: 420px; }
+            .services-cta-content h2 { font-size: 34px; }
+        }
+    </style>
+</head>
+<body data-page="services">
+
+<!-- ===== FULL PAGE VIDEO BACKGROUND ===== -->
+<video autoplay muted loop playsinline class="bg-video">
+    <source src="./videos/13430839_1920_1080_60fps.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+<div class="bg-overlay"></div>
+
+<!-- ===== ANNOUNCEMENT BAR ===== -->
+<div class="announcement-bar">
+    <div class="marquee">
+        <i class="fas fa-star"></i> Welcome to Noor e Mehal - Your Dream Wedding Planner 
+        <i class="fas fa-heart"></i> 
+        <i class="fas fa-gem"></i> Book Now & Get 10% Off on Premium Packages
+    </div>
+</div>
+
+<!-- ===== HEADER ===== -->
+<header>
+    <nav id="mainNav" class="nav-links">
+        <a href="events.html">Events</a>
+        <a href="packages.html">Packages</a>
+        <a href="services.html" class="active">Services</a>
+        <a href="about_us.html">About</a>
+        <a href="faqs.html">FAQs</a>
+        <a href="contact_us.html">Contact</a>
+    </nav>
+
+    <a href="index.html" class="logo">
+        <h1>Noor e <span>Mehal</span></h1>
+    </a>
+
+    <div class="nav-actions">
+        
+            <a href="login.html" class="btn btn-outline">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </a>
+            <a href="register.html" class="btn btn-primary">
+                <i class="fas fa-user-plus"></i> Register
+            </a>
+        
+    </div>
+</header>
+<!-- ===== MAIN SERVICES ===== -->
+<section class="main-services">
+    <div class="container">
+        <div class="services-heading">
+            <h5 class="small-title">WHAT WE OFFER</h5>
+            <h2 class="section-title">Our Wedding Services</h2>
+            <p class="section-text">We bring together creativity, elegance and flawless planning to make your wedding truly unforgettable.</p>
+        </div>
+        <div class="row g-4">
+
+            <!-- SERVICE 1 - WEDDING PLANNING -->
+            <div class="col-lg-4 col-md-6">
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="images/wedplaning.jpg" alt="Wedding Planning">
+                        <div class="service-overlay"></div>
+                        <div class="service-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                        <div class="service-content">
+                            <h3>Wedding Planning</h3>
+                            <p>From the first idea to the final celebration, we plan every detail of your dream wedding.</p>
+                            <a href="detail.html?id=1" class="service-btn">Explore Service <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SERVICE 2 - DÉCOR & STYLING -->
+            <div class="col-lg-4 col-md-6">
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="images/luxdecoration.jpg" alt="Wedding Decoration">
+                        <div class="service-overlay"></div>
+                        <div class="service-icon"><i class="fa-solid fa-palette"></i></div>
+                        <div class="service-content">
+                            <h3>Décor & Styling</h3>
+                            <p>Elegant décor, beautiful themes and luxurious styling designed specially for your celebration.</p>
+                            <a href="detail.html?id=2" class="service-btn">Explore Service <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SERVICE 3 - PHOTOGRAPHY & FILMS -->
+            <div class="col-lg-4 col-md-6">
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="images/servicespic3.jpg" alt="Wedding Photography">
+                        <div class="service-overlay"></div>
+                        <div class="service-icon"><i class="fa-solid fa-camera-retro"></i></div>
+                        <div class="service-content">
+                            <h3>Photography & Films</h3>
+                            <p>Capture every emotion, smile and unforgettable moment of your beautiful wedding day.</p>
+                            <a href="detail.html?id=3" class="service-btn">Explore Service <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SERVICE 4 - CATERING & CUISINE -->
+            <div class="col-lg-4 col-md-6">
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="images/servicespic4.jpg" alt="Wedding Catering">
+                        <div class="service-overlay"></div>
+                        <div class="service-icon"><i class="fa-solid fa-utensils"></i></div>
+                        <div class="service-content">
+                            <h3>Catering & Cuisine</h3>
+                            <p>Delight your guests with delicious cuisine, premium menus and unforgettable dining experiences.</p>
+                            <a href="detail.html?id=4" class="service-btn">Explore Service <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SERVICE 5 - ENTERTAINMENT -->
+            <div class="col-lg-4 col-md-6">
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="images/entertainment.jpg" alt="Wedding Entertainment">
+                        <div class="service-overlay"></div>
+                        <div class="service-icon"><i class="fa-solid fa-music"></i></div>
+                        <div class="service-content">
+                            <h3>Entertainment</h3>
+                            <p>Live music, DJs and entertainment experiences that keep your celebrations alive and memorable.</p>
+                            <a href="detail.html?id=5" class="service-btn">Explore Service <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SERVICE 6 - VENUE MANAGEMENT -->
+            <div class="col-lg-4 col-md-6">
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="images/servicespic2.jpg" alt="Wedding Venue">
+                        <div class="service-overlay"></div>
+                        <div class="service-icon"><i class="fa-solid fa-building"></i></div>
+                        <div class="service-content">
+                            <h3>Venue Management</h3>
+                            <p>We help you choose, organize and manage the perfect venue for your special celebration.</p>
+                            <a href="detail.html?id=6" class="service-btn">Explore Service <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ===== WHY CHOOSE US ===== -->
+<section class="why-choose-section">
+    <div class="container">
+        <div class="why-main-layout">
+            <div class="why-left">
+                <div class="why-content">
+                    <h5 class="small-title">WHY CHOOSE US</h5>
+                    <h2>We Turn Your <span>Dreams</span> Into Memories</h2>
+                    <p>At Noor-E-Mahal, we believe that every wedding deserves to be extraordinary. From the smallest detail to the grandest celebration, our team works with passion and creativity to make your special day truly unforgettable.</p>
+                    <a href="contact_us.html" class="why-btn">Start Planning <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="why-right">
+                <div class="why-features">
+                    <div class="why-feature">
+                        <div class="why-icon"><i class="fa-solid fa-gem"></i></div>
+                        <div><h4>Personalized Planning</h4><p>Every wedding is carefully planned according to your unique vision and style.</p></div>
+                    </div>
+                    <div class="why-feature">
+                        <div class="why-icon"><i class="fa-solid fa-crown"></i></div>
+                        <div><h4>Luxury & Elegance</h4><p>We create sophisticated celebrations filled with elegance and timeless beauty.</p></div>
+                    </div>
+                    <div class="why-feature">
+                        <div class="why-icon"><i class="fa-solid fa-camera"></i></div>
+                        <div><h4>Unforgettable Memories</h4><p>From emotional moments to joyful celebrations, we make every moment memorable.</p></div>
+                    </div>
+                    <div class="why-feature">
+                        <div class="why-icon"><i class="fa-solid fa-handshake"></i></div>
+                        <div><h4>Trusted Coordination</h4><p>Our experienced team manages every detail so you can enjoy your special day stress-free.</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== OUR PROCESS ===== -->
+<section class="process-section">
+    <div class="container">
+        <div class="process-heading">
+            <h5 class="small-title">HOW WE WORK</h5>
+            <h2 class="section-title">From Dream To Celebration</h2>
+            <p class="section-text">We make your wedding journey simple, beautiful and completely stress-free.</p>
+        </div>
+        <div class="process-wrapper">
+            <div class="process-step">
+                <div class="process-number">01</div>
+                <div class="process-icon"><i class="fa-solid fa-comments"></i></div>
+                <h3>Consultation</h3>
+                <p>We listen to your ideas, preferences and dreams to understand exactly what you envision.</p>
+            </div>
+            <div class="process-step">
+                <div class="process-number">02</div>
+                <div class="process-icon"><i class="fa-solid fa-clipboard-list"></i></div>
+                <h3>Planning</h3>
+                <p>Our team carefully plans every detail, from the venue and décor to the entire celebration.</p>
+            </div>
+            <div class="process-step">
+                <div class="process-number">03</div>
+                <div class="process-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                <h3>Designing</h3>
+                <p>We bring your vision to life with elegant styling, beautiful décor and unforgettable details.</p>
+            </div>
+            <div class="process-step">
+                <div class="process-number">04</div>
+                <div class="process-icon"><i class="fa-solid fa-champagne-glasses"></i></div>
+                <h3>Celebration</h3>
+                <p>Sit back, relax and enjoy your special day while we take care of everything.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== WEDDING PACKAGES - USD PRICES ===== -->
+<section class="packages-section">
+    <div class="container">
+        <div class="packages-heading">
+            <h5 class="small-title">CHOOSE YOUR EXPERIENCE</h5>
+            <h2 class="section-title">Wedding Packages</h2>
+            <p class="section-text">Beautifully designed packages created to make your celebration truly unforgettable.</p>
+        </div>
+        <div class="packages-wrapper">
+            <!-- Package 1 - Classic Celebration -->
+            <div class="package-card">
+                <div class="package-top">
+                    <h3>Classic Celebration</h3>
+                    <p>Perfect for intimate and elegant celebrations.</p>
+                </div>
+                <div class="package-price">
+                    <span>Starting From</span>
+                    <h4>$895</h4>
+                    <small>(PKR 250,000)</small>
+                </div>
+                <ul>
+                    <li><i class="fa-solid fa-check"></i> Event Planning</li>
+                    <li><i class="fa-solid fa-check"></i> Basic Décor</li>
+                    <li><i class="fa-solid fa-check"></i> Catering Coordination</li>
+                    <li><i class="fa-solid fa-check"></i> Event Management</li>
+                </ul>
+                <a href="contact_us.html" class="package-btn">Request Package <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+
+            <!-- Package 2 - Royal Celebration (Most Popular) -->
+            <div class="package-card featured-package">
+                <div class="popular-badge">MOST POPULAR</div>
+                <div class="package-top">
+                    <h3>Royal Celebration</h3>
+                    <p>Our most popular choice for a luxurious wedding.</p>
+                </div>
+                <div class="package-price">
+                    <span>Starting From</span>
+                    <h4>$1,785</h4>
+                    <small>(PKR 500,000)</small>
+                </div>
+                <ul>
+                    <li><i class="fa-solid fa-check"></i> Complete Wedding Planning</li>
+                    <li><i class="fa-solid fa-check"></i> Luxury Décor & Styling</li>
+                    <li><i class="fa-solid fa-check"></i> Professional Photography</li>
+                    <li><i class="fa-solid fa-check"></i> Premium Catering</li>
+                    <li><i class="fa-solid fa-check"></i> Full Event Coordination</li>
+                </ul>
+                <a href="contact_us.html" class="package-btn">Request Package <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+
+            <!-- Package 3 - Grand Luxury -->
+            <div class="package-card">
+                <div class="package-top">
+                    <h3>Grand Luxury</h3>
+                    <p>An extraordinary experience designed without limits.</p>
+                </div>
+                <div class="package-price">
+                    <span>Starting From</span>
+                    <h4>$3,215+</h4>
+                    <small>(PKR 900,000+)</small>
+                </div>
+                <ul>
+                    <li><i class="fa-solid fa-check"></i> Complete Wedding Management</li>
+                    <li><i class="fa-solid fa-check"></i> Premium Luxury Décor</li>
+                    <li><i class="fa-solid fa-check"></i> Cinematic Wedding Films</li>
+                    <li><i class="fa-solid fa-check"></i> Exclusive Catering</li>
+                    <li><i class="fa-solid fa-check"></i> Dedicated Wedding Team</li>
+                </ul>
+                <a href="contact_us.html" class="package-btn">Request Package <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== SERVICES CTA ===== -->
+<section class="services-cta">
+    <div class="services-cta-overlay"></div>
+    <div class="container">
+        <div class="services-cta-content">
+            <h5 class="small-title">LET'S CREATE SOMETHING BEAUTIFUL</h5>
+            <h2>Ready To Plan Your <span>Dream Wedding?</span></h2>
+            <p>Tell us your vision and let our experienced team turn your special day into an unforgettable celebration.</p>
+            <a href="contact_us.html" class="cta-btn">Start Your Journey <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="main-footer">
+    <div class="container">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <h2>Noor-E-Mahal</h2>
+                <p>Creating beautiful weddings, unforgettable moments and celebrations that stay in your heart forever.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="#"><i class="fa-brands fa-pinterest-p"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <a href="index.html">Home</a>
+                <a href="about_us.html">About Us</a>
+                <a href="services.html">Services</a>
+                <a href="index.html#gallery">Gallery</a>
+                <a href="contact_us.html">Contact</a>
+            </div>
+            <div class="footer-links">
+                <h3>Our Services</h3>
+                <a href="detail.html?id=1">Wedding Planning</a>
+                <a href="detail.html?id=2">Décor & Styling</a>
+                <a href="detail.html?id=3">Photography & Films</a>
+                <a href="detail.html?id=4">Catering & Cuisine</a>
+                <a href="detail.html?id=5">Entertainment</a>
+            </div>
+            <div class="footer-contact">
+                <h3>Get In Touch</h3>
+                <p><i class="fa-solid fa-location-dot"></i> Karachi, Pakistan</p>
+                <p><i class="fa-solid fa-phone"></i> +92 300 1234567</p>
+                <p><i class="fa-solid fa-envelope"></i> info@nooremahal.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Noor-E-Mahal. All Rights Reserved.</p>
+            <p>Developed by <span>INSHAL AKBER</span></p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    function toggleMenu() {
+        document.getElementById('mainNav').classList.toggle('open');
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
+
+
+

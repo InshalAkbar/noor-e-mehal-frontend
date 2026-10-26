@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Noor e Mehal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #FFD700;
+            --primary-dark: #e6c200;
+            --black: #0a0a0a;
+            --black-light: #1a1a1a;
+            --gray: #888;
+            --white: #ffffff;
+            --gold: #d4af37;
+            --gold-light: #f0d77b;
+            --gold-dark: #a88920;
+            --border: rgba(212, 175, 55, 0.22);
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--black);
+            color: var(--white);
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* ===== FULL PAGE VIDEO BACKGROUND ===== */
+        .bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+        }
+
+        .bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.70);
+            z-index: -1;
+        }
+
+        /* ===== ALL SECTIONS TRANSPARENT ===== */
+        .announcement-bar,
+        header,
+        .about-story,
+        .mission-section,
+        .why-about,
+        .achievement-section,
+        .about-cta,
+        .packages-footer {
+            background: transparent !important;
+            backdrop-filter: blur(2px);
+        }
+
+        .announcement-bar {
+            background: rgba(212, 175, 55, 0.9) !important;
+            color: var(--black);
+            padding: 10px 0;
+            text-align: center;
+            font-weight: 600;
+            font-size: 14px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1001;
+        }
+        .announcement-bar .marquee {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 25s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .announcement-bar i { margin: 0 10px; }
+        .announcement-bar .badge-count {
+            background: var(--black);
+            color: var(--primary);
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+
+        /* ================= HEADER ================= */
+        header {
+            background: rgba(10, 10, 10, 0.85) !important;
+            padding: 15px 40px;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid rgba(255, 215, 0, 0.15);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            justify-self: center;
+            text-decoration: none;
+        }
+        .logo h1 {
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--white);
+            letter-spacing: -0.5px;
+            font-family: 'Cinzel', serif;
+        }
+        .logo h1 span { color: var(--gold); }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            justify-self: start;
+        }
+        .nav-links a {
+            color: var(--gray);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            transition: .3s;
+            position: relative;
+        }
+        .nav-links a:hover,
+        .nav-links a.active { color: var(--gold); }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: .3s;
+        }
+        .nav-links a:hover::after,
+        .nav-links a.active::after { width: 100%; }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            justify-self: end;
+            gap: 15px;
+        }
+        .nav-actions .btn {
+            padding: 10px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: .3s;
+        }
+        .btn-primary {
+            background: var(--gold);
+            color: var(--black);
+        }
+        .btn-primary:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.3);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--gold);
+        }
+        .btn-outline:hover {
+            background: var(--gold);
+            color: var(--black);
+        }
+        .btn-outline i { color: var(--gold); }
+        .btn-outline:hover i { color: var(--black); }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        /*=========================
+              Our Story
+        =========================*/
+        .about-story { padding: 100px 0; }
+        .story-img img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 20px;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            transition: .5s;
+            background: rgba(0,0,0,0.3);
+        }
+        .story-img img:hover {
+            transform: scale(1.03);
+            border-color: #d4af37;
+        }
+        .story-text {
+            color: #cccccc;
+            line-height: 2;
+            margin: 30px 0;
+            font-size: 17px;
+        }
+        .story-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+        .feature-item {
+            color: #d4af37;
+            font-size: 17px;
+            font-weight: 600;
+        }
+
+        /*=========================
+             Mission & Vision
+        =========================*/
+        .mission-section { padding: 100px 0; }
+        .mission-card {
+            position: relative;
+            background: rgba(20, 20, 20, 0.7);
+            backdrop-filter: blur(8px);
+            padding: 45px 35px;
+            border-radius: 20px;
+            border: 1px solid rgba(212, 175, 55, .25);
+            overflow: hidden;
+            transition: .4s;
+            height: 100%;
+        }
+        .mission-card:hover {
+            transform: translateY(-10px);
+            border-color: #d4af37;
+            box-shadow: 0 15px 35px rgba(212, 175, 55, .25);
+        }
+        .card-number {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 55px;
+            font-weight: bold;
+            color: rgba(212, 175, 55, .08);
+            font-family: 'Playfair Display', serif;
+        }
+        .mission-card h3 {
+            color: #d4af37;
+            font-size: 32px;
+            font-family: 'Playfair Display', serif;
+        }
+        .gold-line {
+            width: 70px;
+            height: 3px;
+            background: #d4af37;
+            margin: 18px 0 25px;
+            border-radius: 20px;
+        }
+        .mission-card p {
+            color: #cfcfcf;
+            line-height: 1.9;
+            font-size: 16px;
+        }
+        .mission-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: #d4af37;
+        }
+
+        /*=========================
+              Why Choose Us
+        =========================*/
+        .why-about { padding: 100px 0; }
+        .why-card {
+            background: rgba(24, 24, 24, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(212, 175, 55, .20);
+            border-radius: 18px;
+            padding: 35px 25px;
+            text-align: center;
+            transition: .4s;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        .why-card:hover {
+            transform: translateY(-10px);
+            border-color: #d4af37;
+            box-shadow: 0 15px 35px rgba(212, 175, 55, .20);
+        }
+        .why-card h3 {
+            font-size: 55px;
+            color: rgba(212, 175, 55, .15);
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 10px;
+        }
+        .why-card h4 {
+            color: #d4af37;
+            margin-bottom: 15px;
+            font-family: 'Playfair Display', serif;
+        }
+        .why-card p {
+            color: #cfcfcf;
+            line-height: 1.8;
+            font-size: 15px;
+        }
+
+        /*=========================
+              Achievements
+        =========================*/
+        .achievement-section { padding: 100px 0; }
+        .achievement-card {
+            background: rgba(20, 20, 20, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(212, 175, 55, .20);
+            border-radius: 18px;
+            padding: 40px 20px;
+            transition: .4s;
+        }
+        .achievement-card:hover {
+            transform: translateY(-10px);
+            border-color: #d4af37;
+            box-shadow: 0 15px 35px rgba(212, 175, 55, .25);
+        }
+        .achievement-card h2 {
+            color: #d4af37;
+            font-size: 52px;
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 10px;
+        }
+        .achievement-card h5 {
+            color: #ffffff;
+            font-size: 20px;
+            margin: 0;
+        }
+
+        /*=========================
+              About CTA
+        =========================*/
+        .about-cta {
+            padding: 100px 0;
+            background: rgba(0, 0, 0, 0.5) !important;
+            backdrop-filter: blur(4px);
+        }
+        .cta-box {
+            max-width: 850px;
+            margin: auto;
+            text-align: center;
+            background: rgba(20, 20, 20, 0.5);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(212, 175, 55, .25);
+            border-radius: 20px;
+            padding: 60px 40px;
+        }
+        .cta-box h2 {
+            color: #fff;
+            font-size: 52px;
+            font-family: 'Playfair Display', serif;
+            margin: 20px 0;
+        }
+        .cta-box p {
+            color: #d0d0d0;
+            font-size: 18px;
+            line-height: 1.9;
+            margin-bottom: 35px;
+        }
+        .btn-gold {
+            background: #d4af37;
+            color: #000;
+            padding: 14px 38px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: .4s;
+        }
+        .btn-gold:hover {
+            background: #b99222;
+            color: #fff;
+            transform: translateY(-4px);
+        }
+
+        /*=========================
+              Packages Footer
+        =========================*/
+        .packages-footer {
+            background: rgba(9, 9, 9, 0.9) !important;
+            padding: 70px 0 25px;
+            border-top: 2px solid rgba(212, 175, 55, 0.15);
+            backdrop-filter: blur(5px);
+        }
+        .footer-logo {
+            color: #d4af37;
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        .footer-text {
+            color: #bfbfbf;
+            line-height: 1.9;
+        }
+        .footer-title {
+            color: #fff;
+            margin-bottom: 20px;
+        }
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        .footer-links a {
+            color: #cfcfcf;
+            text-decoration: none;
+            transition: .3s;
+        }
+        .footer-links a:hover {
+            color: #d4af37;
+            padding-left: 6px;
+        }
+        .packages-footer p {
+            color: #cfcfcf;
+        }
+        .packages-footer p i {
+            color: #d4af37;
+            margin-right: 10px;
+        }
+        .footer-social {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        .footer-social a {
+            width: 42px;
+            height: 42px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid rgba(212, 175, 55, .35);
+            border-radius: 50%;
+            color: #d4af37;
+            transition: .35s;
+            text-decoration: none;
+        }
+        .footer-social a:hover {
+            background: #d4af37;
+            color: #000;
+            transform: translateY(-5px);
+        }
+        .packages-footer hr {
+            border-color: rgba(255, 255, 255, .08);
+            margin: 50px 0 25px;
+        }
+        .footer-bottom {
+            color: #999;
+            text-align: center;
+        }
+
+        /*=========================
+              Common Section Headings
+        =========================*/
+        .small-title {
+            color: #d4af37;
+            letter-spacing: 4px;
+            font-size: 15px;
+        }
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            color: white;
+            margin: 20px 0;
+        }
+        .section-text {
+            color: #ddd;
+            max-width: 700px;
+            margin: auto;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 768px) {
+            header { padding: 12px 20px; grid-template-columns: 1fr auto 1fr; }
+            .nav-links { gap: 10px; }
+            .nav-links a { font-size: 13px; }
+            .nav-actions .btn { padding: 8px 16px; font-size: 12px; }
+            .section-title { font-size: 32px; }
+            .story-features { grid-template-columns: 1fr; }
+            .story-img img { height: 300px; }
+            .cta-box { padding: 30px 20px; }
+            .cta-box h2 { font-size: 34px; }
+            .footer-logo { font-size: 28px; }
+        }
+        @media (max-width: 576px) {
+            .about-story { padding: 60px 0; }
+            .mission-section { padding: 60px 0; }
+            .why-about { padding: 60px 0; }
+            .achievement-section { padding: 60px 0; }
+            .about-cta { padding: 60px 0; }
+            .story-img img { height: 200px; }
+            .section-title { font-size: 28px; }
+            .mission-card { padding: 30px 20px; }
+            .why-card { padding: 25px 15px; }
+        }
+    </style>
+</head>
+<body data-page="about_us">
+
+<!-- ===== FULL PAGE VIDEO BACKGROUND ===== -->
+<video autoplay muted loop playsinline class="bg-video">
+    <source src="./videos/13430839_1920_1080_60fps.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+<div class="bg-overlay"></div>
+
+<!-- ===== ANNOUNCEMENT BAR ===== -->
+<div class="announcement-bar">
+    <div class="marquee">
+        <i class="fas fa-star"></i> Welcome to Noor e Mehal - Your Dream Wedding Planner 
+        <i class="fas fa-heart"></i> 
+        <i class="fas fa-gem"></i> Book Now & Get 10% Off on Premium Packages
+    </div>
+</div>
+
+<!-- ===== HEADER ===== -->
+<header>
+    <nav class="nav-links">
+        <a href="events.html">Events</a>
+        <a href="packages.html">Packages</a>
+        <a href="services.html">Services</a>
+        <a href="about_us.html" class="active">About</a>
+        <a href="faqs.html">FAQs</a>
+        <a href="contact_us.html">Contact</a>
+    </nav>
+
+    <a href="index.html" class="logo">
+        <h1>Noor e <span>Mehal</span></h1>
+    </a>
+
+    <div class="nav-actions">
+        
+            <a href="login.html" class="btn btn-outline">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </a>
+            <a href="register.html" class="btn btn-primary">
+                <i class="fas fa-user-plus"></i> Register
+            </a>
+        
+    </div>
+
+    <button class="mobile-toggle" onclick="toggleMenu()">
+        <i class="fas fa-bars"></i>
+    </button>
+</header>
+
+<!-- ================= OUR STORY ================= -->
+<section class="about-story py-5">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6">
+                <div class="story-img">
+                    <img src="./images/servicespic.jpg" class="img-fluid rounded-4" alt="About Noor-E-Mahal">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <h5 class="small-title">OUR STORY</h5>
+                <h2 class="section-title">Every Wedding Has A Beautiful Story, We Make It Unforgettable.</h2>
+                <p class="story-text">
+                    Noor-E-Mahal was established with one mission — to turn dream weddings into unforgettable celebrations.
+                    We believe every couple deserves a wedding filled with elegance, happiness and timeless memories.
+                    From luxurious decorations and premium catering to flawless event management, our experienced team ensures every detail is handled with perfection.
+                </p>
+                <div class="story-features">
+                    <div class="feature-item">✔ Luxury Decoration</div>
+                    <div class="feature-item">✔ Professional Wedding Planning</div>
+                    <div class="feature-item">✔ Premium Catering Services</div>
+                    <div class="feature-item">✔ Photography & Videography</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= MISSION & VISION ================= -->
+<section class="mission-section">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h5 class="small-title">OUR PURPOSE</h5>
+            <h2 class="section-title">Mission & Vision</h2>
+            <p class="section-text">We are dedicated to creating timeless wedding experiences with elegance, luxury and perfection.</p>
+        </div>
+        <div class="row justify-content-center g-4">
+            <div class="col-lg-5">
+                <div class="mission-card">
+                    <span class="card-number">01</span>
+                    <h3>Our Mission</h3>
+                    <div class="gold-line"></div>
+                    <p>At Noor-E-Mahal, our mission is to transform every wedding into an unforgettable celebration through luxury planning, elegant decorations, premium catering and flawless event management.</p>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="mission-card">
+                    <span class="card-number">02</span>
+                    <h3>Our Vision</h3>
+                    <div class="gold-line"></div>
+                    <p>Our vision is to become Pakistan's leading luxury wedding organizer by delivering unforgettable celebrations with creativity, professionalism and timeless elegance.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= WHY CHOOSE US ================= -->
+<section class="why-about py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h5 class="small-title">WHY CHOOSE US</h5>
+            <h2 class="section-title">Why Couples Trust Noor-E-Mahal</h2>
+            <p class="section-text">We combine creativity, luxury and professionalism to make every wedding a truly unforgettable experience.</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="why-card">
+                    <h3>01</h3>
+                    <h4>Luxury Planning</h4>
+                    <p>Every wedding is carefully planned with elegance, creativity and attention to every detail.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="why-card">
+                    <h3>02</h3>
+                    <h4>Royal Decoration</h4>
+                    <p>Premium floral designs and breathtaking decorations that create unforgettable moments.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="why-card">
+                    <h3>03</h3>
+                    <h4>Expert Team</h4>
+                    <p>Our experienced planners ensure every event runs smoothly from start to finish.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="why-card">
+                    <h3>04</h3>
+                    <h4>Customer Satisfaction</h4>
+                    <p>We work closely with every couple to bring their dream wedding to life.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= ACHIEVEMENTS ================= -->
+<section class="achievement-section">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h5 class="small-title">OUR ACHIEVEMENTS</h5>
+            <h2 class="section-title">A Journey of Excellence</h2>
+            <p class="section-text">Our dedication and passion have helped us create unforgettable wedding experiences for hundreds of couples.</p>
+        </div>
+        <div class="row text-center g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="achievement-card">
+                    <h2>500+</h2>
+                    <h5>Happy Couples</h5>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="achievement-card">
+                    <h2>350+</h2>
+                    <h5>Luxury Weddings</h5>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="achievement-card">
+                    <h2>10+</h2>
+                    <h5>Years Experience</h5>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="achievement-card">
+                    <h2>24/7</h2>
+                    <h5>Client Support</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= CALL TO ACTION ================= -->
+<section class="about-cta">
+    <div class="container">
+        <div class="cta-box">
+            <h5 class="small-title">LET'S CREATE MEMORIES</h5>
+            <h2>Ready To Plan Your Dream Wedding?</h2>
+            <p>From elegant decorations to unforgettable celebrations, Noor-E-Mahal is here to make your special day truly magical.</p>
+            <a href="contact_us.html" class="btn btn-gold">Book A Consultation</a>
+        </div>
+    </div>
+</section>
+
+<!-- ================= PACKAGES FOOTER ================= -->
+<footer class="packages-footer">
+    <div class="container">
+        <div class="row gy-5">
+            <div class="col-lg-4">
+                <h3 class="footer-logo">Noor-E-Mahal</h3>
+                <p class="footer-text">Creating timeless weddings with elegance, luxury and unforgettable memories. Your dream celebration starts with us.</p>
+            </div>
+            <div class="col-lg-4">
+                <h4 class="footer-title">Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about_us.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="packages.html">Packages</a></li>
+                    <li><a href="index.html#gallery">Gallery</a></li>
+                    <li><a href="contact_us.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-4">
+                <h4 class="footer-title">Contact</h4>
+                <p><i class="fa-solid fa-location-dot"></i> Karachi, Pakistan</p>
+                <p><i class="fa-solid fa-phone"></i> +92 321 3988294</p>
+                <p><i class="fa-solid fa-envelope"></i> nooremahal@gmail.com</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="footer-bottom">© 2026 Noor-E-Mahal. All Rights Reserved.</div>
+    </div>
+</footer>
+
+<script>
+    function toggleMenu() {
+        document.getElementById('mainNav').classList.toggle('open');
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
+
+
+

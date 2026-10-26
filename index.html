@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noor e Mehal - Wedding Planner</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #FFD700;
+            --primary-dark: #e6c200;
+            --black: #0a0a0a;
+            --black-light: #1a1a1a;
+            --gray: #888;
+            --light-gray: #2a2a2a;
+            --white: #ffffff;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* ===== FULL PAGE VIDEO BACKGROUND ===== */
+        .bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+        }
+
+        .bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.70);
+            z-index: -1;
+        }
+
+        /* ===== ALL SECTIONS TRANSPARENT ===== */
+        .announcement-bar,
+        header,
+        .hero,
+        .why-us,
+        .packages,
+        .gallery,
+        .testimonials,
+        .cta-section,
+        .contact,
+        .faq-section,
+        .footer {
+            background: transparent !important;
+            backdrop-filter: blur(2px);
+        }
+
+        /* ===== ANNOUNCEMENT BAR ===== */
+        .announcement-bar {
+            background: rgba(212, 175, 55, 0.9) !important;
+            color: var(--black);
+            padding: 10px 0;
+            text-align: center;
+            font-weight: 600;
+            font-size: 14px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1001;
+        }
+        .announcement-bar .marquee {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 25s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .announcement-bar i { margin: 0 10px; }
+        .announcement-bar .badge-count {
+            background: var(--black);
+            color: var(--primary);
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+        .announcement-bar .approved-count {
+            background: var(--black);
+            color: var(--primary);
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+
+        /* ================= HEADER ================= */
+        header {
+            background: rgba(10, 10, 10, 0.85) !important;
+            padding: 15px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid rgba(255, 215, 0, 0.15);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 0 0 auto;
+            text-decoration: none;
+        }
+        .logo h1 {
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--white);
+            letter-spacing: -0.5px;
+            font-family: 'Cinzel', serif;
+        }
+        .logo h1 span { color: var(--primary); }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex: 1;
+        }
+        .nav-links a {
+            color: var(--gray);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            transition: all 0.3s;
+            position: relative;
+        }
+        .nav-links a:hover,
+        .nav-links a.active { color: var(--primary); }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+        .nav-links a:hover::after,
+        .nav-links a.active::after { width: 100%; }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 15px;
+            flex: 1;
+        }
+        .nav-actions .btn {
+            padding: 10px 24px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: var(--black);
+        }
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.3);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--primary);
+        }
+        .btn-outline:hover {
+            background: var(--primary);
+            color: var(--black);
+        }
+        .btn-outline i { color: var(--primary); }
+        .btn-outline:hover i { color: var(--black); }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        /* ================= HERO ================= */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 100px 20px;
+            position: relative;
+            background: transparent !important;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 20px;
+        }
+
+        .subtitle {
+            color: #d4af37;
+            letter-spacing: 5px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 8vw, 72px);
+            color: #fff;
+            font-family: 'Playfair Display', serif;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            color: #ddd;
+            margin: 30px 0;
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
+        .hero-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn-gold {
+            display: inline-block;
+            background: #d4af37;
+            color: #000;
+            border: 2px solid #d4af37;
+            padding: 13px 32px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all .35s ease;
+        }
+        .btn-gold:hover {
+            background: transparent;
+            color: #d4af37;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, .35);
+        }
+
+        .btn-outline-hero {
+            display: inline-block;
+            background: transparent;
+            border: 2px solid #d4af37;
+            color: #fff;
+            padding: 13px 32px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all .35s ease;
+        }
+        .btn-outline-hero:hover {
+            background: #d4af37;
+            color: #000;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, .35);
+        }
+
+        /* ================= REST OF THE SECTIONS ================= */
+        .small-title {
+            color: #d4af37;
+            letter-spacing: 4px;
+            font-size: 15px;
+        }
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            color: white;
+            margin: 20px 0;
+        }
+        .section-text {
+            color: #ddd;
+            max-width: 700px;
+            margin: auto;
+            line-height: 1.8;
+        }
+
+        /* Why Us */
+        .feature-card {
+            height: 500px;
+            border-radius: 20px;
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            transition: .5s;
+            background-color: rgba(0,0,0,0.3);
+        }
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 30px rgba(212, 175, 55, .3);
+        }
+        .card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,.95), rgba(0,0,0,.35));
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            text-align: center;
+            padding: 35px;
+        }
+        .card-overlay h3 {
+            color: white;
+            font-family: 'Playfair Display', serif;
+            font-size: 34px;
+            margin-bottom: 15px;
+        }
+        .card-overlay p {
+            color: #ddd;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+        .card-btn {
+            text-decoration: none;
+            color: #d4af37;
+            border: 1px solid #d4af37;
+            padding: 10px 28px;
+            border-radius: 30px;
+            transition: .4s;
+        }
+        .card-btn:hover {
+            background: #d4af37;
+            color: black;
+        }
+
+        /* Packages */
+        .package-card {
+            background: rgba(21, 21, 21, 0.85);
+            border: 1px solid rgba(212, 175, 55, .25);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            transition: .4s;
+            backdrop-filter: blur(5px);
+        }
+        .package-card:hover {
+            transform: translateY(-10px);
+            border-color: #d4af37;
+            box-shadow: 0 0 30px rgba(212, 175, 55, .25);
+        }
+        .package-card h3 {
+            color: #d4af37;
+            font-size: 30px;
+            margin-bottom: 15px;
+            font-family: 'Playfair Display', serif;
+        }
+        .package-card h1 {
+            color: #fff;
+            font-size: 45px;
+            margin-bottom: 25px;
+        }
+        .package-card ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 30px;
+        }
+        .package-card ul li {
+            color: #ddd;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, .08);
+        }
+        .featured {
+            transform: scale(1.05);
+            border: 2px solid #d4af37;
+        }
+        .featured:hover { transform: scale(1.05) translateY(-10px); }
+        .badge-package {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #d4af37;
+            color: #000;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        /* Gallery */
+        .luxury-card {
+            position: relative;
+            height: 500px;
+            overflow: hidden;
+            border-radius: 20px;
+            border: 1px solid rgba(212, 175, 55, .25);
+            transition: .5s;
+            background: rgba(0,0,0,0.3);
+        }
+        .luxury-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .luxury-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,.95), rgba(0,0,0,.2));
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 25px;
+        }
+        .card-number {
+            width: 60px;
+            height: 60px;
+            background: #d4af37;
+            color: #000;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 22px;
+            font-weight: bold;
+            box-shadow: 0 0 20px rgba(212, 175, 55, .4);
+        }
+        .card-content {
+            transform: translateY(70px);
+            transition: .5s;
+        }
+        .card-content h3 {
+            color: white;
+            font-size: 38px;
+            font-family: 'Playfair Display', serif;
+        }
+        .gold-line {
+            width: 0;
+            height: 3px;
+            background: #d4af37;
+            margin: 15px 0;
+            transition: .5s;
+        }
+        .card-content p {
+            color: #ddd;
+            opacity: 0;
+            transition: .5s;
+            font-size: 17px;
+        }
+        .explore-btn {
+            display: inline-block;
+            margin-top: 20px;
+            color: #d4af37;
+            text-decoration: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: .5s;
+        }
+        .luxury-card:hover {
+            transform: translateY(-8px);
+            border-color: #d4af37;
+            box-shadow: 0 0 30px rgba(212, 175, 55, .35);
+        }
+        .luxury-card:hover img { transform: scale(1.12); }
+        .luxury-card:hover .card-content { transform: translateY(0); }
+        .luxury-card:hover .gold-line { width: 100px; }
+        .luxury-card:hover p { opacity: 1; }
+        .luxury-card:hover .explore-btn { opacity: 1; transform: translateY(0); }
+
+        /* Testimonials */
+        .testimonial-card {
+            background: rgba(20, 20, 20, 0.85);
+            border: 1px solid rgba(212, 175, 55, .25);
+            border-radius: 20px;
+            padding: 35px;
+            text-align: center;
+            transition: .4s;
+            height: 100%;
+            backdrop-filter: blur(5px);
+        }
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            border-color: #d4af37;
+            box-shadow: 0 0 25px rgba(212, 175, 55, .35);
+        }
+        .client-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #d4af37;
+            margin-bottom: 20px;
+        }
+        .stars { color: #d4af37; font-size: 22px; margin-bottom: 15px; }
+        .testimonial-card p { color: #ddd; line-height: 1.8; font-size: 16px; }
+        .testimonial-card h4 {
+            color: #d4af37;
+            margin-top: 20px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* CTA */
+        .cta-section {
+            padding: 100px 0;
+            background: rgba(0, 0, 0, 0.5) !important;
+            backdrop-filter: blur(4px);
+        }
+        .cta-box { text-align: center; max-width: 800px; margin: auto; }
+        .cta-box h2 {
+            color: #fff;
+            font-size: 52px;
+            font-family: 'Playfair Display', serif;
+            margin: 20px 0;
+        }
+        .cta-box p { color: #ddd; font-size: 18px; line-height: 1.8; margin-bottom: 35px; }
+        .cta-btn { padding: 15px 45px; font-size: 18px; border-radius: 50px; transition: .4s; }
+        .cta-btn:hover { transform: translateY(-5px); box-shadow: 0 0 25px rgba(212, 175, 55, .5); }
+
+        /* Contact */
+        .contact-info {
+            background: rgba(20, 20, 20, 0.85);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(212, 175, 55, .2);
+            backdrop-filter: blur(5px);
+        }
+        .contact-info h3 { color: #d4af37; margin-bottom: 30px; font-family: 'Playfair Display', serif; }
+        .info-box { margin-bottom: 25px; }
+        .info-box h5 { color: #d4af37; }
+        .info-box p { color: #ddd; margin: 0; }
+        .contact-form {
+            background: rgba(20, 20, 20, 0.85);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(212, 175, 55, .2);
+            backdrop-filter: blur(5px);
+        }
+        .contact-form .form-control {
+            background: rgba(17, 17, 17, 0.8);
+            border: 1px solid #333;
+            color: white;
+            padding: 15px;
+        }
+        .contact-form .form-control:focus {
+            border-color: #d4af37;
+            box-shadow: none;
+        }
+        .contact-form .form-control::placeholder { color: #888; }
+
+        /* FAQ */
+        .accordion-item {
+            background: rgba(20, 20, 20, 0.85);
+            border: 1px solid rgba(212, 175, 55, .2);
+            margin-bottom: 15px;
+            border-radius: 12px !important;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+        }
+        .accordion-button {
+            background: rgba(20, 20, 20, 0.85) !important;
+            color: #fff !important;
+            font-weight: 600;
+            box-shadow: none !important;
+            padding: 20px;
+        }
+        .accordion-button:not(.collapsed) {
+            background: rgba(27, 27, 27, 0.9) !important;
+            color: #d4af37 !important;
+        }
+        .accordion-button::after { filter: invert(1); }
+        .accordion-body {
+            background: rgba(20, 20, 20, 0.85);
+            color: #ddd;
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(0, 0, 0, 0.85) !important;
+            padding: 80px 0 30px;
+            border-top: 2px solid #d4af37;
+            backdrop-filter: blur(5px);
+        }
+        .footer-logo {
+            color: #d4af37;
+            font-family: 'Playfair Display', serif;
+            font-size: 38px;
+        }
+        .footer-text { color: #bbb; line-height: 1.8; margin-top: 20px; }
+        .footer h4 { color: #d4af37; margin-bottom: 20px; }
+        .footer-links { list-style: none; padding: 0; }
+        .footer-links li { margin-bottom: 12px; color: #ccc; }
+        .footer-links a { color: #ccc; text-decoration: none; transition: .3s; }
+        .footer-links a:hover { color: #d4af37; padding-left: 8px; }
+        .footer p { color: #ccc; }
+        .social-icons { margin-top: 20px; }
+        .social-icons a {
+            width: 45px;
+            height: 45px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #d4af37;
+            color: #d4af37;
+            border-radius: 50%;
+            margin-right: 10px;
+            text-decoration: none;
+            transition: .4s;
+        }
+        .social-icons a:hover {
+            background: #d4af37;
+            color: #000;
+            transform: translateY(-5px);
+        }
+        .footer hr {
+            border-color: rgba(212, 175, 55, .3);
+            margin: 50px 0 20px;
+        }
+        .copyright { text-align: center; color: #888; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header { padding: 12px 20px; flex-wrap: wrap; }
+            .nav-links { order: 3; flex: 0 0 100%; justify-content: center; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
+            .nav-links a { font-size: 13px; }
+            .nav-actions .btn { padding: 8px 16px; font-size: 12px; }
+            .hero { min-height: 80vh; }
+            .hero h1 { font-size: 36px; }
+            .hero p { font-size: 16px; }
+            .featured { transform: none; }
+            .featured:hover { transform: translateY(-10px); }
+            .section-title { font-size: 32px; }
+            .cta-box h2 { font-size: 34px; }
+            .footer { padding: 50px 0 20px; }
+            .feature-card, .luxury-card { height: 350px; }
+        }
+        @media (max-width: 576px) {
+            .hero h1 { font-size: 28px; }
+            .btn-gold, .btn-outline-hero { padding: 10px 20px; font-size: 14px; }
+            .feature-card, .luxury-card { height: 280px; }
+            .card-overlay h3 { font-size: 24px; }
+            .card-content h3 { font-size: 28px; }
+        }
+    </style>
+</head>
+<body data-page="index">
+
+<!-- ===== FULL PAGE VIDEO BACKGROUND ===== -->
+<video autoplay muted loop playsinline class="bg-video">
+    <source src="./videos/13430839_1920_1080_60fps.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+<div class="bg-overlay"></div>
+
+<!-- ===== ANNOUNCEMENT BAR ===== -->
+<div class="announcement-bar">
+    <div class="marquee">
+        <i class="fas fa-star"></i> Welcome to Noor e Mehal - Your Dream Wedding Planner 
+        <i class="fas fa-heart"></i> 
+        <span class="approved-count">✅ 6 Approved Events</span>
+        <i class="fas fa-gem"></i> Book Now & Get 10% Off on Premium Packages 
+        <i class="fas fa-crown"></i> Best Wedding Services in Town
+        <i class="fas fa-calendar-check"></i> Plan Your Perfect Day With Us
+    </div>
+</div>
+
+<!-- ===== HEADER ===== -->
+<header>
+    <nav id="mainNav" class="nav-links">
+        <a href="events.html">Events</a>
+        <a href="packages.html">Packages</a>
+        <a href="services.html">Services</a>
+        <a href="about_us.html">About</a>
+        <a href="faqs.html">FAQs</a>
+        <a href="contact_us.html">Contact</a>
+    </nav>
+
+    <a href="index.html" class="logo">
+        <h1>Noor e <span>Mehal</span></h1>
+    </a>
+
+    <div class="nav-actions">
+        
+            <a href="login.html" class="btn btn-outline">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </a>
+            <a href="register.html" class="btn btn-primary">
+                <i class="fas fa-user-plus"></i> Register
+            </a>
+        
+    </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="home">
+    <div class="hero-content">
+        <h4 class="subtitle">Luxury Wedding Planner</h4>
+        <h1>Your Dream Wedding <br>Starts Here</h1>
+        <p>Creating unforgettable weddings with elegance, luxury and timeless memories.</p>
+        <div class="hero-btn">
+            <a href="contact_us.html" class="btn-gold">Book Consultation</a>
+            <a href="services.html" class="btn-outline-hero">Explore Services</a>
+        </div>
+    </div>
+</section>
+
+<!-- ===== WHY CHOOSE US ===== -->
+<section class="why-us py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h5 class="small-title">WHY CHOOSE US</h5>
+            <h2 class="section-title">Making Every Wedding Magical</h2>
+            <p class="section-text">At Noor-E-Mahal, we create luxurious weddings with elegant decor, exceptional planning, and unforgettable experiences for every couple.</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card" style="background-image: url('./images/pexels-thevisionaryvows-33914530.jpg');">
+                    <div class="card-overlay">
+                        <h3>Luxury Decoration</h3>
+                        <p>Royal stage decoration, floral arrangements, and premium wedding themes.</p>
+                        <a href="packages.html" class="card-btn">Explore More →</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card" style="background-image: url('./images/pexels-mehmet-altintas-392989477-37188045.jpg');">
+                    <div class="card-overlay">
+                        <h3>Photography</h3>
+                        <p>Professional photographers capturing every memorable moment beautifully.</p>
+                        <a href="packages.html" class="card-btn">Explore More →</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card" style="background-image: url('./images/pexels-kevin-yung-2152346613-36766850.jpg');">
+                    <div class="card-overlay">
+                        <h3>Premium Catering</h3>
+                        <p>Delicious menus with luxury presentation for every wedding event.</p>
+                        <a href="packages.html" class="card-btn">Explore More →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== PACKAGES ===== -->
+<section class="packages py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h5 class="small-title">OUR PACKAGES</h5>
+            <h2 class="section-title">Choose Your Dream Wedding Package</h2>
+            <p class="section-text">Affordable to Royal luxury wedding packages designed to make your special day unforgettable.</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <div class="package-card">
+                    <h3>Silver</h3>
+                    <h1>Rs.250K</h1>
+                    <ul>
+                        <li>✔ Stage Decoration</li>
+                        <li>✔ Photography</li>
+                        <li>✔ Catering</li>
+                        <li>✔ Sound System</li>
+                        <li>✔ Guest Management</li>
+                    </ul>
+                    <a href="packages.html" class="btn btn-gold w-100">Book Now</a>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="package-card featured">
+                    <span class="badge-package">MOST POPULAR</span>
+                    <h3>Gold</h3>
+                    <h1>Rs.500K</h1>
+                    <ul>
+                        <li>✔ Luxury Decoration</li>
+                        <li>✔ Premium Catering</li>
+                        <li>✔ Photography + Video</li>
+                        <li>✔ Bridal Entry</li>
+                        <li>✔ DJ & Lighting</li>
+                    </ul>
+                    <a href="packages.html" class="btn btn-gold w-100">Book Now</a>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="package-card">
+                    <h3>Royal</h3>
+                    <h1>Rs.900K</h1>
+                    <ul>
+                        <li>✔ Everything Included</li>
+                        <li>✔ Luxury Venue</li>
+                        <li>✔ Live Music</li>
+                        <li>✔ Fireworks</li>
+                        <li>✔ Full Event Management</li>
+                    </ul>
+                    <a href="packages.html" class="btn btn-gold w-100">Book Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== GALLERY ===== -->
+<section id="gallery" class="gallery py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h5 class="small-title">OUR GALLERY</h5>
+            <h2 class="section-title">Beautiful Wedding Moments</h2>
+            <p class="section-text">A glimpse of the unforgettable weddings we have beautifully planned and managed.</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-6 col-md-6">
+                <div class="luxury-card">
+                    <img src="./images/gallerypics.jpg" alt="Bride Entry">
+                    <div class="luxury-overlay">
+                        <span class="card-number">01</span>
+                        <div class="card-content">
+                            <h3>Bride Entry</h3>
+                            <div class="gold-line"></div>
+                            <p>Experience a royal bridal entrance with elegant décor, beautiful lighting and unforgettable moments.</p>
+                            <a href="services.html" class="explore-btn">Explore →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="luxury-card">
+                    <img src="./images/gallerypic1.jpg" alt="Stage Decoration">
+                    <div class="luxury-overlay">
+                        <span class="card-number">02</span>
+                        <div class="card-content">
+                            <h3>Stage Decoration</h3>
+                            <div class="gold-line"></div>
+                            <p>Elegant stage designs with premium floral décor, luxury lighting and stunning backdrops.</p>
+                            <a href="services.html" class="explore-btn">Explore →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="luxury-card">
+                    <img src="./images/gallerypic2.jpg" alt="Wedding Photography">
+                    <div class="luxury-overlay">
+                        <span class="card-number">03</span>
+                        <div class="card-content">
+                            <h3>Wedding Photography</h3>
+                            <div class="gold-line"></div>
+                            <p>Capture every precious moment with our professional photographers and cinematic wedding films.</p>
+                            <a href="services.html" class="explore-btn">Explore →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="luxury-card">
+                    <img src="./images/gallerypic3.jpg" alt="Royal Wedding Setup">
+                    <div class="luxury-overlay">
+                        <span class="card-number">04</span>
+                        <div class="card-content">
+                            <h3>Royal Wedding Setup</h3>
+                            <div class="gold-line"></div>
+                            <p>Transform your venue into a royal masterpiece with luxurious décor, elegant lighting and breathtaking floral arrangements.</p>
+                            <a href="services.html" class="explore-btn">View Collection →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section class="testimonials py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h5 class="small-title">HAPPY COUPLES</h5>
+            <h2 class="section-title">What Our Clients Say</h2>
+            <p class="section-text">Making every wedding unforgettable with luxury and elegance.</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="testimonial-card">
+                    <img src="./images/ratepic1.jpg" class="client-img">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p>"Noor-E-Mahal transformed our wedding into a royal celebration. Every detail was perfect."</p>
+                    <h4>Ali & Ayesha</h4>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="testimonial-card">
+                    <img src="./images/ratepic2.jpg" class="client-img">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p>"Amazing decoration, delicious food and outstanding management. Highly recommended!"</p>
+                    <h4>Hamza & Fatima</h4>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="testimonial-card">
+                    <img src="./images/ratepic3.jpg" class="client-img">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p>"Professional team with elegant wedding themes. They exceeded all our expectations."</p>
+                    <h4>Ahmed & Zainab</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="faq-section py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h5 class="small-title">FAQ</h5>
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <p class="section-text">Find answers to the most common questions about our wedding planning services.</p>
+        </div>
+        <div class="accordion" id="faqAccordion">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                        How early should I book my wedding?
+                    </button>
+                </h2>
+                <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">We recommend booking at least 6 to 12 months before your wedding date to ensure availability.</div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                        Do you provide catering services?
+                    </button>
+                </h2>
+                <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">Yes! We offer premium catering with customized menus for every wedding.</div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                        Can I customize my wedding package?
+                    </button>
+                </h2>
+                <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">Absolutely! Every package can be customized according to your budget and requirements.</div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                        Do you arrange destination weddings?
+                    </button>
+                </h2>
+                <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">Yes, we organize luxury destination weddings across Pakistan and selected international locations.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+    <div class="container">
+        <div class="row gy-5">
+            <div class="col-lg-4">
+                <h2 class="footer-logo">Noor-E-Mahal</h2>
+                <p class="footer-text">Creating unforgettable weddings with luxury, elegance and perfection. Your dream wedding begins here.</p>
+            </div>
+            <div class="col-lg-2">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about_us.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="index.html#gallery">Gallery</a></li>
+                    <li><a href="contact_us.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3">
+                <h4>Our Services</h4>
+                <ul class="footer-links">
+                    <li>Wedding Planning</li>
+                    <li>Stage Decoration</li>
+                    <li>Photography</li>
+                    <li>Catering</li>
+                    <li>Event Management</li>
+                </ul>
+            </div>
+            <div class="col-lg-3">
+                <h4>Contact Info</h4>
+                <p>📍 Karachi, Pakistan</p>
+                <p>📞 +92 300 1234567</p>
+                <p>✉ info@nooremahal.com</p>
+                <p>🕘 Mon - Sun | 9 AM - 10 PM</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="copyright">© 2026 Noor-E-Mahal. All Rights Reserved.</div>
+    </div>
+</footer>
+
+<script>
+    function toggleMenu() {
+        document.getElementById('mainNav').classList.toggle('open');
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
+
+
+
